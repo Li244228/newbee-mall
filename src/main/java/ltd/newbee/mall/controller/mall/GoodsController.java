@@ -106,8 +106,8 @@ public class GoodsController {
 
     @RequestMapping(value = "/answers", method = RequestMethod.DELETE)
     @ResponseBody
-    public void answersDelete(@RequestBody List<Long> answerId) {
-    	newBeeMallGoodsService.deleteAnswerById(answerId); 
+    public Result answersDelete(@RequestBody List<Long> answerId) {
+    	return ResultGenerator.genSuccessResult(newBeeMallGoodsService.deleteAnswerById(answerId)); 
 
     }
 }

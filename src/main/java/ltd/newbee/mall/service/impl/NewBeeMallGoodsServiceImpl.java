@@ -145,10 +145,10 @@ public class NewBeeMallGoodsServiceImpl implements NewBeeMallGoodsService {
 	}
 	
 	@Override
-	public void deleteAnswerById(List<Long> answerId) {
+	public int deleteAnswerById(List<Long> answerId) {
 		// TODO Auto-generated method stub
-		goodsMapper.deleteAnswerById(answerId);
-
+		int delete = goodsMapper.deleteAnswerById(answerId);
+		return delete;
 	}
 
 }
