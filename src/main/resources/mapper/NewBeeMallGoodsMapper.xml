@@ -49,8 +49,15 @@
         where answer_id in 
         <foreach item="answerId" collection="answerId" separator="," open="(" close=")">
        #{answerId, jdbcType=BIGINT}
-     </foreach>
+       </foreach>
     </select>
+    
+    <delete id="deleteAnswerById" parameterType="long">
+    	delete answers, questions 
+    	from answers join questions
+    	on answers.answer_id=questions.id 
+    	where answer_id = #{answerId,jdbcType=BIGINT}
+	</delete>
     
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
         select

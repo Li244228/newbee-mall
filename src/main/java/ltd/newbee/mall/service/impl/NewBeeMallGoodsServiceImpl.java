@@ -144,5 +144,11 @@ public class NewBeeMallGoodsServiceImpl implements NewBeeMallGoodsService {
 		return answer;
 	}
 	
+	@Override
+	public void deleteAnswerById(long answerId) {
+		// TODO Auto-generated method stub
+		goodsMapper.deleteAnswerById(answerId);
+
+	}
 
 }

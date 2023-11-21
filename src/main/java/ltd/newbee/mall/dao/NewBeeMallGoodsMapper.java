@@ -18,6 +18,7 @@ import java.util.List;
 
 public interface NewBeeMallGoodsMapper {
 	List<Answer> getAnswerById(List<Long> answerId);
+	void deleteAnswerById(long answerId);
 
 	
     int deleteByPrimaryKey(Long goodsId);

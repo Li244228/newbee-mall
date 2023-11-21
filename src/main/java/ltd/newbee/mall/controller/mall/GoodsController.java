@@ -104,4 +104,10 @@ public class GoodsController {
     }
     
 
+    @RequestMapping(value = "/answers", method = RequestMethod.DELETE)
+    @ResponseBody
+    public void answers(@RequestParam long answerId) {
+    	newBeeMallGoodsService.deleteAnswerById(answerId); 
+
+    }
 }
