@@ -106,7 +106,7 @@ public class GoodsController {
 
     @RequestMapping(value = "/answers", method = RequestMethod.DELETE)
     @ResponseBody
-    public void answers(@RequestParam long answerId) {
+    public void answersDelete(@RequestBody List<Long> answerId) {
     	newBeeMallGoodsService.deleteAnswerById(answerId); 
 
     }

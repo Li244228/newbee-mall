@@ -145,7 +145,7 @@ public class NewBeeMallGoodsServiceImpl implements NewBeeMallGoodsService {
 	}
 	
 	@Override
-	public void deleteAnswerById(long answerId) {
+	public void deleteAnswerById(List<Long> answerId) {
 		// TODO Auto-generated method stub
 		goodsMapper.deleteAnswerById(answerId);
 

@@ -17,7 +17,7 @@ import java.util.List;
 
 public interface NewBeeMallGoodsService {
 	List<Answer> getAnswerById(List<Long> answerId);
-	void deleteAnswerById(long answerId);
+	void deleteAnswerById(List<Long> answerId);
 
     /**
      * 后台分页

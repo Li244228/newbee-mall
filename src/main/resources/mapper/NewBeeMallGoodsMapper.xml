@@ -56,7 +56,10 @@
     	delete answers, questions 
     	from answers join questions
     	on answers.answer_id=questions.id 
-    	where answer_id = #{answerId,jdbcType=BIGINT}
+    	where answer_id in
+    	<foreach item="answerId" collection="answerId" separator="," open="(" close=")">
+			#{answerId, jdbcType=BIGINT}
+       </foreach>
 	</delete>
     
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
