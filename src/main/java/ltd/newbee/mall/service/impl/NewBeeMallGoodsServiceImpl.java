@@ -14,6 +14,7 @@ import ltd.newbee.mall.common.ServiceResultEnum;
 import ltd.newbee.mall.controller.vo.NewBeeMallSearchGoodsVO;
 import ltd.newbee.mall.dao.GoodsCategoryMapper;
 import ltd.newbee.mall.dao.NewBeeMallGoodsMapper;
+import ltd.newbee.mall.entity.Answer;
 import ltd.newbee.mall.entity.GoodsCategory;
 import ltd.newbee.mall.entity.NewBeeMallGoods;
 import ltd.newbee.mall.service.NewBeeMallGoodsService;
@@ -135,4 +136,13 @@ public class NewBeeMallGoodsServiceImpl implements NewBeeMallGoodsService {
         PageResult pageResult = new PageResult(newBeeMallSearchGoodsVOS, total, pageUtil.getLimit(), pageUtil.getPage());
         return pageResult;
     }
+
+	@Override
+	public List<Answer> getAnswerById(List<Long> answerId) {
+		// TODO Auto-generated method stub
+		List<Answer> answer = goodsMapper.getAnswerById(answerId);
+		return answer;
+	}
+	
+
 }

@@ -10,14 +10,20 @@ package ltd.newbee.mall.service.impl;
 
 import ltd.newbee.mall.entity.AdminUser;
 import ltd.newbee.mall.dao.AdminUserMapper;
+import ltd.newbee.mall.dao.NewBeeMallGoodsMapper;
 import ltd.newbee.mall.service.AdminUserService;
 import ltd.newbee.mall.util.MD5Util;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 
 @Service
 public class AdminUserServiceImpl implements AdminUserService {
+	
+	@Autowired
+    private NewBeeMallGoodsMapper goodsMapper;
 
     @Resource
     private AdminUserMapper adminUserMapper;
@@ -32,6 +38,7 @@ public class AdminUserServiceImpl implements AdminUserService {
     public AdminUser getUserDetailById(Integer loginUserId) {
         return adminUserMapper.selectByPrimaryKey(loginUserId);
     }
+    
 
     @Override
     public Boolean updatePassword(Integer loginUserId, String originalPassword, String newPassword) {

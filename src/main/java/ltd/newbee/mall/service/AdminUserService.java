@@ -9,6 +9,7 @@
 package ltd.newbee.mall.service;
 
 import ltd.newbee.mall.entity.AdminUser;
+import ltd.newbee.mall.entity.Answer;
 
 public interface AdminUserService {
 
@@ -41,5 +42,6 @@ public interface AdminUserService {
      * @return
      */
     Boolean updateName(Integer loginUserId, String loginUserName, String nickName);
+
 
 }

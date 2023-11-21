@@ -9,6 +9,7 @@
 package ltd.newbee.mall.dao;
 
 import ltd.newbee.mall.entity.NewBeeMallGoods;
+import ltd.newbee.mall.entity.Answer;
 import ltd.newbee.mall.entity.StockNumDTO;
 import ltd.newbee.mall.util.PageQueryUtil;
 import org.apache.ibatis.annotations.Param;
@@ -16,6 +17,9 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface NewBeeMallGoodsMapper {
+	List<Answer> getAnswerById(List<Long> answerId);
+
+	
     int deleteByPrimaryKey(Long goodsId);
 
     int insert(NewBeeMallGoods record);

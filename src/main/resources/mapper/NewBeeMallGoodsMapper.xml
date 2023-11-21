@@ -40,6 +40,18 @@
             (#{goods.goodsName},#{goods.goodsIntro},#{goods.goodsCategoryId},#{goods.goodsCoverImg},#{goods.goodsCarousel},#{goods.goodsDetailContent},#{goods.originalPrice},#{goods.sellingPrice},#{goods.stockNum})
         </foreach>
     </insert>
+    
+    
+    <select id="getAnswerById" parameterType="long" resultType="ltd.newbee.mall.entity.Answer">
+        SELECT answers.content, answers.answer_id, questions.question_id 
+        FROM answers JOIN questions 
+        ON answers.answer_id=questions.id 
+        where answer_id in 
+        <foreach item="answerId" collection="answerId" separator="," open="(" close=")">
+       #{answerId, jdbcType=BIGINT}
+     </foreach>
+    </select>
+    
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
         select
         <include refid="Base_Column_List"/>

@@ -9,12 +9,15 @@
 package ltd.newbee.mall.service;
 
 import ltd.newbee.mall.entity.NewBeeMallGoods;
+import ltd.newbee.mall.entity.Answer;
 import ltd.newbee.mall.util.PageQueryUtil;
 import ltd.newbee.mall.util.PageResult;
 
 import java.util.List;
 
 public interface NewBeeMallGoodsService {
+	List<Answer> getAnswerById(List<Long> answerId);
+
     /**
      * 后台分页
      *
