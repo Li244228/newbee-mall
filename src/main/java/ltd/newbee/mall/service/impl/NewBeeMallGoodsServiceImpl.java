@@ -29,6 +29,7 @@ import org.springframework.util.CollectionUtils;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class NewBeeMallGoodsServiceImpl implements NewBeeMallGoodsService {
@@ -149,6 +150,13 @@ public class NewBeeMallGoodsServiceImpl implements NewBeeMallGoodsService {
 		// TODO Auto-generated method stub
 		int delete = goodsMapper.deleteAnswerById(answerId);
 		return delete;
+	}
+	
+	@Override
+	public void updateAnswerById(Map<Long, String> updateAnswer) {
+		// TODO Auto-generated method stub
+		goodsMapper.updateAnswerById(updateAnswer);
+
 	}
 
 }

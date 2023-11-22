@@ -110,4 +110,10 @@ public class GoodsController {
     	return ResultGenerator.genSuccessResult(newBeeMallGoodsService.deleteAnswerById(answerId)); 
 
     }
+    
+    @RequestMapping(value = "/answers", method = RequestMethod.PUT)
+    @ResponseBody
+    public void answersUpdate(@RequestBody Map<Long, String> updateAnswer) {
+    	newBeeMallGoodsService.updateAnswerById(updateAnswer);
+    }
 }

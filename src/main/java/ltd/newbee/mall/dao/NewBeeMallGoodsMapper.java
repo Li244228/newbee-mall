@@ -15,10 +15,12 @@ import ltd.newbee.mall.util.PageQueryUtil;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface NewBeeMallGoodsMapper {
 	List<Answer> getAnswerById(List<Long> answerId);
 	int deleteAnswerById(@Param("answerId") List<Long> answerId);
+	void updateAnswerById(Map<Long, String> updateAnswer);
 
 	
     int deleteByPrimaryKey(Long goodsId);

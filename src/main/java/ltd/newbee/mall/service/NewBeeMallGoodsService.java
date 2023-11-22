@@ -14,10 +14,12 @@ import ltd.newbee.mall.util.PageQueryUtil;
 import ltd.newbee.mall.util.PageResult;
 
 import java.util.List;
+import java.util.Map;
 
 public interface NewBeeMallGoodsService {
 	List<Answer> getAnswerById(List<Long> answerId);
 	int deleteAnswerById(List<Long> answerId);
+	void updateAnswerById(Map<Long, String> updateAnswer);
 
     /**
      * 后台分页
