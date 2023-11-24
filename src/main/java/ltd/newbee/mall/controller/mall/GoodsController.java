@@ -113,7 +113,7 @@ public class GoodsController {
     
     @RequestMapping(value = "/answers", method = RequestMethod.PUT)
     @ResponseBody
-    public void answersUpdate(@RequestBody Map<Long, String> updateAnswer) {
+    public void answersUpdate(@RequestBody Map<Object, String> updateAnswer) {
     	newBeeMallGoodsService.updateAnswerById(updateAnswer);
     }
 }

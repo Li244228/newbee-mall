@@ -20,7 +20,7 @@ import java.util.Map;
 public interface NewBeeMallGoodsMapper {
 	List<Answer> getAnswerById(List<Long> answerId);
 	int deleteAnswerById(@Param("answerId") List<Long> answerId);
-	void updateAnswerById(Map<Long, String> updateAnswer);
+	void updateAnswerById(Map<Object, String> updateAnswer);
 
 	
     int deleteByPrimaryKey(Long goodsId);

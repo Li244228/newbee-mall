@@ -65,10 +65,7 @@
 	<update id="updateAnswerById">
         update answers
         set answers.content=#{content, jdbcType=VARCHAR}
-        where answer_id in
-        <foreach item="answerId" collection="answerId" open="(" separator="," close=")">
-            #{answerId, jdbcType=BIGINT}
-        </foreach>
+        where answer_id = #{answerId, jdbcType=BIGINT}
     </update>
     
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">

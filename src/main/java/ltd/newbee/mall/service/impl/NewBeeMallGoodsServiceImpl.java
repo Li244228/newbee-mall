@@ -153,7 +153,7 @@ public class NewBeeMallGoodsServiceImpl implements NewBeeMallGoodsService {
 	}
 	
 	@Override
-	public void updateAnswerById(Map<Long, String> updateAnswer) {
+	public void updateAnswerById(Map<Object, String> updateAnswer) {
 		// TODO Auto-generated method stub
 		goodsMapper.updateAnswerById(updateAnswer);
 

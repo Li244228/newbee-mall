@@ -19,7 +19,7 @@ import java.util.Map;
 public interface NewBeeMallGoodsService {
 	List<Answer> getAnswerById(List<Long> answerId);
 	int deleteAnswerById(List<Long> answerId);
-	void updateAnswerById(Map<Long, String> updateAnswer);
+	void updateAnswerById(Map<Object, String> updateAnswer);
 
     /**
      * 后台分页
