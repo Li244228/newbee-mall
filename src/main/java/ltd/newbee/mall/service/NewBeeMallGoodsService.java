@@ -20,6 +20,7 @@ public interface NewBeeMallGoodsService {
 	List<Answer> getAnswerById(List<Long> answerId);
 	int deleteAnswerById(List<Long> answerId);
 	void updateAnswerById(Map<Object, String> updateAnswer);
+	PageResult getAnswerPage(PageQueryUtil pageUtil);
 
     /**
      * 后台分页

@@ -21,6 +21,8 @@ public interface NewBeeMallGoodsMapper {
 	List<Answer> getAnswerById(List<Long> answerId);
 	int deleteAnswerById(@Param("answerId") List<Long> answerId);
 	void updateAnswerById(Map<Object, String> updateAnswer);
+	List<Answer> findAnswerList(PageQueryUtil pageUtil);
+	int getTotalAnswer(PageQueryUtil pageUtil);
 
 	
     int deleteByPrimaryKey(Long goodsId);

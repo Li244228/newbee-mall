@@ -15,6 +15,7 @@ import ltd.newbee.mall.controller.vo.NewBeeMallSearchGoodsVO;
 import ltd.newbee.mall.dao.GoodsCategoryMapper;
 import ltd.newbee.mall.dao.NewBeeMallGoodsMapper;
 import ltd.newbee.mall.entity.Answer;
+import ltd.newbee.mall.entity.Carousel;
 import ltd.newbee.mall.entity.GoodsCategory;
 import ltd.newbee.mall.entity.NewBeeMallGoods;
 import ltd.newbee.mall.service.NewBeeMallGoodsService;
@@ -158,5 +159,13 @@ public class NewBeeMallGoodsServiceImpl implements NewBeeMallGoodsService {
 		goodsMapper.updateAnswerById(updateAnswer);
 
 	}
+
+	@Override
+    public PageResult getAnswerPage(PageQueryUtil pageUtil) {
+        List<Answer> answerList = goodsMapper.findAnswerList(pageUtil);
+        int total = goodsMapper.getTotalAnswer(pageUtil);
+        PageResult pageResult = new PageResult(answerList, total, pageUtil.getLimit(), pageUtil.getPage());
+        return pageResult;
+    }
 
 }
