@@ -116,4 +116,14 @@ public class GoodsController {
     public void answersUpdate(@RequestBody Map<Object, String> updateAnswer) {
     	newBeeMallGoodsService.updateAnswerById(updateAnswer);
     }
+    
+    @RequestMapping(value = "/answers/list", method = RequestMethod.GET)
+    @ResponseBody
+    public Result answerList(@RequestParam Map<String, Object> params) {
+        if (ObjectUtils.isEmpty(params.get("page")) || ObjectUtils.isEmpty(params.get("limit"))) {
+            return ResultGenerator.genFailResult("参数异常！");
+        }
+        PageQueryUtil pageUtil = new PageQueryUtil(params);
+        return ResultGenerator.genSuccessResult(newBeeMallGoodsService.getAnswerPage(pageUtil));
+    }
 }

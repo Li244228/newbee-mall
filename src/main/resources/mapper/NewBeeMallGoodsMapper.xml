@@ -68,6 +68,26 @@
         where answer_id = #{answerId, jdbcType=BIGINT}
     </update>
     
+    <sql id="Answer_List">
+    	answer_id, is_deleted
+	</sql>
+    
+	<select id="findAnswerList" parameterType="Map" resultMap="BaseResultMap">
+        select
+        <include refid="Answer_List"/>
+        from answers
+        where is_deleted = 0
+        order by answer_id
+        <if test="start!=null and limit!=null">
+            limit #{start},#{limit}
+        </if>
+    </select>
+    
+    <select id="getTotalAnswer" parameterType="Map" resultType="int">
+        select count(*) from answers
+        where is_deleted = 0
+    </select>
+    
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
         select
         <include refid="Base_Column_List"/>
