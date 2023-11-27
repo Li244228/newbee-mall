@@ -69,12 +69,16 @@
     </update>
     
     <sql id="Answer_List">
-    	answer_id, is_deleted
+    	answer_id, is_deleted, content
 	</sql>
+	
+	<resultMap id="AnswerResultMap" type="ltd.newbee.mall.entity.Answer">
+        <id column="answer_id" jdbcType="INTEGER" property="answerId"/>
+        <result column="content" jdbcType="VARCHAR" property="content"/>
+    </resultMap>
     
-	<select id="findAnswerList" parameterType="Map" resultMap="BaseResultMap">
-        select
-        <include refid="Answer_List"/>
+	<select id="findAnswerList" parameterType="Map" resultMap="AnswerResultMap">
+        select answers.answer_id, answers.content
         from answers
         where is_deleted = 0
         order by answer_id
