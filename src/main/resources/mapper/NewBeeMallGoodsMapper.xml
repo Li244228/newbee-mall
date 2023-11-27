@@ -69,18 +69,19 @@
     </update>
     
     <sql id="Answer_List">
-    	answer_id, is_deleted, content
+    	answer_id, is_deleted, content, question_id
 	</sql>
 	
 	<resultMap id="AnswerResultMap" type="ltd.newbee.mall.entity.Answer">
         <id column="answer_id" jdbcType="INTEGER" property="answerId"/>
         <result column="content" jdbcType="VARCHAR" property="content"/>
+        <result column="question_id" jdbcType="INTEGER" property="questionId"/>
     </resultMap>
     
-	<select id="findAnswerList" parameterType="Map" resultMap="AnswerResultMap">
-        select answers.answer_id, answers.content
-        from answers
-        where is_deleted = 0
+	<select id="findAnswerList" parameterType="Map" resultType="ltd.newbee.mall.entity.Answer">
+        select answers.answer_id, answers.content, questions.question_id
+        from answers join questions
+        on answers.answer_id=questions.id 
         order by answer_id
         <if test="start!=null and limit!=null">
             limit #{start},#{limit}
