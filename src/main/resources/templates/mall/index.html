@@ -339,6 +339,110 @@
             </th:block>
         </ul>
     </div>
+    <div id="discount">
+        <h2>打折商品</h2>
+        <a href="##" class="more">查看更多>></a>
+        <ul>
+            <!-- 已配置打折商品则显示配置内容 -->
+            <th:block th:unless="${#lists.isEmpty(discountGoodses)}">
+                <th:block th:each="discountGoods : ${discountGoodses}">
+                    <li>
+                        <a th:href="@{'/goods/detail/'+${discountGoods.goodsId}}">
+                            <div class="info discount" th:text="${discountGoods.tag}">
+                                打折
+                            </div>
+                            <img th:src="@{${discountGoods.goodsCoverImg}}" th:alt="${discountGoods.goodsName}">
+                            <p class="name" th:text="${discountGoods.goodsName}">NewBeeMall</p>
+                            <p class="item_price" th:text="${discountGoods.sellingPrice}">NewBeeMall</p>
+                            <p class="counter">猜你喜欢</p>
+                            <div class="comment">
+                                <p>新蜂精选</p>
+                                <p>限时促销</p>
+                            </div>
+                        </a>
+                    </li>
+                </th:block>
+            </th:block>
+            <!-- 未配置则显示默认 -->
+            <th:block th:if="${#lists.isEmpty(discountGoodses)}">
+                <li>
+                    <a href="##">
+                        <div class="info discount">
+                            新品
+                        </div>
+                        <img src="https://mujipywebblob.blob.core.chinacloudapi.cn/oms39736/8e7f1fb5-4f68-4908-a5b6-e843358f70b7.jpg" alt=""/>
+                        <p class="name">懒人沙发</p>
+                        <p class="price">1499元</p>
+                        <p class="counter">猜你喜欢</p>
+                        <div class="comment">
+                            <p>新蜂精选</p>
+                            <p>限时促销</p>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="##">
+                        <div class="info discount">
+                            5折起
+                        </div>
+                        <img src="https://mujipywebblob.blob.core.chinacloudapi.cn/oms4891/7045e4a6-59ae-4aab-9a1e-dae6e121d3ce.jpg" alt=""/>
+                        <p class="name">耳机壳</p>
+                        <p class="price">1499元</p>
+                        <p class="counter">猜你喜欢</p>
+                        <div class="comment">
+                            <p>新蜂精选</p>
+                            <p>限时促销</p>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="##">
+                        <div class="info discount">
+                            新品
+                        </div>
+                        <img src="https://a.zdmimg.com/202003/03/5e5e20a50a585372.jpg_e1080.jpg" alt=""/>
+                        <p class="name">电动牙刷</p>
+                        <p class="price">1499元</p>
+                        <p class="counter">猜你喜欢</p>
+                        <div class="comment">
+                            <p>新蜂精选</p>
+                            <p>限时促销</p>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="##">
+                        <div class="info discount">
+                            官降
+                        </div>
+                        <img src="https://mujipywebblob.blob.core.chinacloudapi.cn/oms4891/70802395-5430-44bc-92d5-1b5e51c69529.jpg" alt=""/>
+                        <p class="name">数字钟</p>
+                        <p class="price">1499元</p>
+                        <p class="counter">猜你喜欢</p>
+                        <div class="comment">
+                            <p>新蜂精选</p>
+                            <p>限时促销</p>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="##">
+                        <div class="info discount">
+                            打折商品
+                        </div>
+                        <img src="https://mujipywebblob.blob.core.chinacloudapi.cn/oms39736/8e7f1fb5-4f68-4908-a5b6-e843358f70b7.jpg" alt=""/>
+                        <p class="name">迷你电烤箱</p>
+                        <p class="price">1499元</p>
+                        <p class="counter">猜你喜欢</p>
+                        <div class="comment">
+                            <p>新蜂精选</p>
+                            <p>限时促销</p>
+                        </div>
+                    </a>
+                </li>
+            </th:block>
+        </ul>
+    </div>
 </content>
 <div th:replace="mall/footer::footer-fragment"></div>
 <!-- jQuery -->
