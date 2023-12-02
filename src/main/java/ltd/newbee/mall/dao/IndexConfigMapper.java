@@ -9,6 +9,7 @@
 package ltd.newbee.mall.dao;
 
 import ltd.newbee.mall.entity.IndexConfig;
+import ltd.newbee.mall.entity.NewBeeMallGoods;
 import ltd.newbee.mall.util.PageQueryUtil;
 import org.apache.ibatis.annotations.Param;
 
@@ -36,4 +37,5 @@ public interface IndexConfigMapper {
     int deleteBatch(Long[] ids);
 
     List<IndexConfig> findIndexConfigsByTypeAndNum(@Param("configType") int configType, @Param("number") int number);
+    List<NewBeeMallGoods> findIndexConfigsByTypeAndNumJoin(@Param("configType") int configType, @Param("number") int number);
 }

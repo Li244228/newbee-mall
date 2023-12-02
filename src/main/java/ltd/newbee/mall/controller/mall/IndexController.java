@@ -48,12 +48,14 @@ public class IndexController {
         List<NewBeeMallIndexConfigGoodsVO> newGoodses = newBeeMallIndexConfigService.getConfigGoodsesForIndex(IndexConfigTypeEnum.INDEX_GOODS_NEW.getType(), Constants.INDEX_GOODS_NEW_NUMBER);
         List<NewBeeMallIndexConfigGoodsVO> recommendGoodses = newBeeMallIndexConfigService.getConfigGoodsesForIndex(IndexConfigTypeEnum.INDEX_GOODS_RECOMMOND.getType(), Constants.INDEX_GOODS_RECOMMOND_NUMBER);
         List<NewBeeMallIndexConfigGoodsVO> discountGoodses = newBeeMallIndexConfigService.getConfigGoodsesForIndex(IndexConfigTypeEnum.INDEX_GOODS_DISCOUNT.getType(), Constants.INDEX_GOODS_DISCOUNT_NUMBER);
+        List<NewBeeMallIndexConfigGoodsVO> discountGoodsesJoin = newBeeMallIndexConfigService.getConfigGoodsesForIndexJoin(IndexConfigTypeEnum.INDEX_GOODS_DISCOUNTJOIN.getType(), Constants.INDEX_GOODS_DISCOUNTJOIN_NUMBER);
         request.setAttribute("categories", categories);//分类数据
         request.setAttribute("carousels", carousels);//轮播图
         request.setAttribute("hotGoodses", hotGoodses);//热销商品
         request.setAttribute("newGoodses", newGoodses);//新品
         request.setAttribute("recommendGoodses", recommendGoodses);//推荐商品
         request.setAttribute("discountGoodses", discountGoodses);//打折商品
+        request.setAttribute("discountGoodsesJoin", discountGoodsesJoin);//打折商品二合一
         return "mall/index";
     }
 }
