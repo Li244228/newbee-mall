@@ -38,4 +38,5 @@ public interface IndexConfigMapper {
 
     List<IndexConfig> findIndexConfigsByTypeAndNum(@Param("configType") int configType, @Param("number") int number);
     List<NewBeeMallGoods> findIndexConfigsByTypeAndNumJoin(@Param("configType") int configType, @Param("number") int number);
+    List<NewBeeMallGoods> findIndexConfigsByTypeAndNumPrice(@Param("configType") int configType, @Param("number") int number);
 }

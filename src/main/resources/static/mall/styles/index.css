@@ -776,3 +776,131 @@
     font-size: 12px;
     margin-top: 5px;
 }
+
+#content #discountprice {
+    width: 1226px;
+    position: relative;
+    flex-shrink: 0;
+    height: 398px;
+    margin-top: 20px;
+    background-color: #f5f5f5;
+}
+
+#content #discountprice > h2 {
+    height: 58px;
+    line-height: 58px;
+}
+
+#content #discountprice .more {
+    position: absolute;
+    top: 18px;
+    right: 30px;
+}
+
+#content #discountprice .more:hover {
+    color: #1baeae;
+}
+
+#content #discountprice ul {
+    display: flex;
+    height: 614px;
+    justify-content: space-between;
+    align-content: space-between;
+    flex-wrap: wrap;
+}
+
+#content #discountprice ul li {
+    width: 234px;
+    height: 314px;
+    background-color: #fff;
+    margin-bottom: 20px;
+    margin-left: 4px;
+    margin-right: 6px;
+}
+
+#content #discountprice ul li:nth-child(1) .hot-image,
+#content #discountprice ul li:nth-child(6) .hot-image {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+#content #discountprice ul li:hover {
+    box-shadow: 0px 0px 30px #ccc;
+}
+
+#content #discountprice ul li:hover .comment {
+    transform: translateY(0);
+}
+
+#content #discountprice ul li a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 14px;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+#content #discountprice ul li a .info {
+    width: 104px;
+    height: 20px;
+    text-align: center;
+    line-height: 20px;
+    color: #fff;
+    font-size: 10px;
+}
+
+#content #discountprice ul li a .new {
+    background-color: #83c44e;
+}
+
+#content #discountprice ul li a .discount {
+    background-color: #f00;
+}
+
+#content #discountprice ul li a > p {
+    height: 25px;
+    line-height: 25px;
+    font-size: 14px;
+}
+
+#content #discountprice ul li a .item_price {
+    color: #1baeae;
+}
+
+#content #discountprice ul li a .counter {
+    height: 15px;
+    line-height: 15px;
+    color: #aaa;
+    font-size: 12px;
+}
+
+#content #discountprice ul li a img {
+    width: 160px;
+    height: 160px;
+    margin: 10px 0 20px;
+}
+
+#content #discountprice ul li a .comment {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transform: translateY(101%);
+    transition: transform 0.4s;
+    box-sizing: border-box;
+    height: 70px;
+    padding: 10px 0 0 30px;
+    background-color: #1baeae;
+    color: #fff;
+    text-align: left;
+}
+
+#content #discountprice ul li a .comment p {
+    font-size: 12px;
+    margin-top: 5px;
+}

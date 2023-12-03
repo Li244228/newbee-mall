@@ -80,7 +80,17 @@
         join tb_newbee_mall_index_config
         on tb_newbee_mall_index_config.goods_id=tb_newbee_mall_goods_info.goods_id
         where tb_newbee_mall_index_config.config_type = #{configType} and is_deleted = 0
-        order by config_rank desc
+        order by config_rank asc
+        limit #{number}
+    </select>
+    <select id="findIndexConfigsByTypeAndNumPrice" resultMap="BaseResultMapJoin">
+        select
+        <include refid="Base_Column_List_Join"/>
+        from tb_newbee_mall_goods_info
+        join tb_newbee_mall_index_config
+        on tb_newbee_mall_index_config.goods_id=tb_newbee_mall_goods_info.goods_id
+        where tb_newbee_mall_index_config.config_type = #{configType} and is_deleted = 0
+        order by tb_newbee_mall_goods_info.selling_price asc
         limit #{number}
     </select>
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
