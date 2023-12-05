@@ -100,8 +100,8 @@ public class GoodsController {
         BeanUtil.copyProperties(goods, goodsDetailVO);
         goodsDetailVO.setGoodsCarouselList(goods.getGoodsCarousel().split(","));
         request.setAttribute("goodsDetail", goodsDetailVO);
-        if (Constants.MALL_USER_SESSION_KEY != null) {
-        	NewBeeMallUserVO user = (NewBeeMallUserVO) httpSession.getAttribute(Constants.MALL_USER_SESSION_KEY);
+        NewBeeMallUserVO user = (NewBeeMallUserVO) httpSession.getAttribute(Constants.MALL_USER_SESSION_KEY);
+        if (user != null) { //想判断是否是登陆状态
         	UserCheckedHistory userCheckedHistory=new UserCheckedHistory();
         	userCheckedHistory.setGoodsId(goodsId);
         	userCheckedHistory.setUserId(user.getUserId());

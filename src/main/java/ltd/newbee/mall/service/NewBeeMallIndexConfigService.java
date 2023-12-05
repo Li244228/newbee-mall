@@ -39,6 +39,7 @@ public interface NewBeeMallIndexConfigService {
     List<NewBeeMallIndexConfigGoodsVO> getConfigGoodsesForIndex(int configType, int number);
     List<NewBeeMallIndexConfigGoodsVO> getConfigGoodsesForIndexJoin(int configType, int number);
     List<NewBeeMallIndexConfigGoodsVO> getConfigGoodsesForIndexPrice(int configType, int number);
+    List<NewBeeMallIndexConfigGoodsVO> getUserCheckedGoodsesForIndex(long userId, int number);
 
     Boolean deleteBatch(Long[] ids);
 }

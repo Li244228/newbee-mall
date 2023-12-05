@@ -14,6 +14,8 @@ import ltd.newbee.mall.common.NewBeeMallException;
 import ltd.newbee.mall.controller.vo.NewBeeMallIndexCarouselVO;
 import ltd.newbee.mall.controller.vo.NewBeeMallIndexCategoryVO;
 import ltd.newbee.mall.controller.vo.NewBeeMallIndexConfigGoodsVO;
+import ltd.newbee.mall.controller.vo.NewBeeMallUserVO;
+import ltd.newbee.mall.entity.UserCheckedHistory;
 import ltd.newbee.mall.service.NewBeeMallCarouselService;
 import ltd.newbee.mall.service.NewBeeMallCategoryService;
 import ltd.newbee.mall.service.NewBeeMallIndexConfigService;
@@ -23,6 +25,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -38,7 +43,7 @@ public class IndexController {
     private NewBeeMallCategoryService newBeeMallCategoryService;
 
     @GetMapping({"/index", "/", "/index.html"})
-    public String indexPage(HttpServletRequest request) {
+    public String indexPage(HttpServletRequest request, HttpSession httpSession) {
         List<NewBeeMallIndexCategoryVO> categories = newBeeMallCategoryService.getCategoriesForIndex();
         if (CollectionUtils.isEmpty(categories)) {
             NewBeeMallException.fail("分类数据不完善");
@@ -58,6 +63,11 @@ public class IndexController {
         request.setAttribute("discountGoodses", discountGoodses);//打折商品
         request.setAttribute("discountGoodsesJoin", discountGoodsesJoin);//打折商品二合一
         request.setAttribute("discountGoodsesPrice", discountGoodsesPrice);//打折商品价格升序
+        NewBeeMallUserVO user = (NewBeeMallUserVO) httpSession.getAttribute(Constants.MALL_USER_SESSION_KEY);
+        if (user != null) { //想判断是否是登陆状态
+        	List<NewBeeMallIndexConfigGoodsVO> userCheckedGoodses = newBeeMallIndexConfigService.getUserCheckedGoodsesForIndex(user.getUserId(), Constants.INDEX_GOODS_USERCHECKEDGOODS_NUMBER);
+        	request.setAttribute("userCheckedGoodses", userCheckedGoodses);//最近看过
+        }
         return "mall/index";
     }
 }

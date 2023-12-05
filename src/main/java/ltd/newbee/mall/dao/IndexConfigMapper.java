@@ -8,6 +8,7 @@
  */
 package ltd.newbee.mall.dao;
 
+import ltd.newbee.mall.controller.vo.NewBeeMallIndexConfigGoodsVO;
 import ltd.newbee.mall.entity.IndexConfig;
 import ltd.newbee.mall.entity.NewBeeMallGoods;
 import ltd.newbee.mall.util.PageQueryUtil;
@@ -39,4 +40,5 @@ public interface IndexConfigMapper {
     List<IndexConfig> findIndexConfigsByTypeAndNum(@Param("configType") int configType, @Param("number") int number);
     List<NewBeeMallGoods> findIndexConfigsByTypeAndNumJoin(@Param("configType") int configType, @Param("number") int number);
     List<NewBeeMallGoods> findIndexConfigsByTypeAndNumPrice(@Param("configType") int configType, @Param("number") int number);
+    List<NewBeeMallGoods> findUserCheckedGoodsByUserId(@Param("userId")long userId, int number);
 }

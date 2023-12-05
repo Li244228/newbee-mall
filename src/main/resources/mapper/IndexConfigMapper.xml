@@ -31,6 +31,23 @@
         <result column="update_user" jdbcType="INTEGER" property="updateUser"/>
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
     </resultMap>
+    <resultMap id="BaseResultMapUserCheckedGoods" type="ltd.newbee.mall.entity.NewBeeMallGoods">
+        <id column="goods_id" jdbcType="BIGINT" property="goodsId"/>
+        <result column="goods_name" jdbcType="VARCHAR" property="goodsName"/>
+        <result column="goods_intro" jdbcType="VARCHAR" property="goodsIntro"/>
+        <result column="goods_category_id" jdbcType="BIGINT" property="goodsCategoryId"/>
+        <result column="goods_cover_img" jdbcType="VARCHAR" property="goodsCoverImg"/>
+        <result column="goods_carousel" jdbcType="VARCHAR" property="goodsCarousel"/>
+        <result column="original_price" jdbcType="INTEGER" property="originalPrice"/>
+        <result column="selling_price" jdbcType="INTEGER" property="sellingPrice"/>
+        <result column="stock_num" jdbcType="INTEGER" property="stockNum"/>
+        <result column="tag" jdbcType="VARCHAR" property="tag"/>
+        <result column="goods_sell_status" jdbcType="TINYINT" property="goodsSellStatus"/>
+        <result column="create_user" jdbcType="INTEGER" property="createUser"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_user" jdbcType="INTEGER" property="updateUser"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
     <sql id="Base_Column_List">
     config_id, config_name, config_type, goods_id, redirect_url, config_rank, is_deleted, 
     create_time, create_user, update_time, update_user
@@ -39,6 +56,11 @@
     tb_newbee_mall_goods_info.goods_id, goods_name, goods_intro,goods_category_id, goods_cover_img, goods_carousel, original_price,
     selling_price, stock_num, tag, goods_sell_status, tb_newbee_mall_goods_info.create_user, tb_newbee_mall_goods_info.create_time, tb_newbee_mall_goods_info.update_user, 
     tb_newbee_mall_goods_info.update_time
+  </sql>
+	<sql id="Base_Column_List_Check">
+    tb_newbee_mall_goods_info.goods_id, goods_name, goods_intro,goods_category_id, goods_cover_img, goods_carousel, original_price,
+    selling_price, stock_num, tag, goods_sell_status, tb_newbee_mall_goods_info.create_user, tb_newbee_mall_goods_info.create_time, tb_newbee_mall_goods_info.update_user, 
+    tb_newbee_mall_goods_info.update_time, user_id, check_time
   </sql>
 
     <select id="findIndexConfigList" parameterType="Map" resultMap="BaseResultMap">
@@ -91,6 +113,16 @@
         on tb_newbee_mall_index_config.goods_id=tb_newbee_mall_goods_info.goods_id
         where tb_newbee_mall_index_config.config_type = #{configType} and is_deleted = 0
         order by tb_newbee_mall_goods_info.selling_price asc
+        limit #{number}
+    </select>
+    <select id="findUserCheckedGoodsByUserId" resultMap="BaseResultMapUserCheckedGoods">
+        select
+        <include refid="Base_Column_List_Check"/>
+        from tb_newbee_mall_goods_info
+        join tb_newbee_mall_user_browsing_history
+        on tb_newbee_mall_goods_info.goods_id=tb_newbee_mall_user_browsing_history.goods_id
+        where user_id = #{userId}
+        order by check_time desc
         limit #{number}
     </select>
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
