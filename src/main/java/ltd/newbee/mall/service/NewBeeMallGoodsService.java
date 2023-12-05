@@ -9,6 +9,7 @@
 package ltd.newbee.mall.service;
 
 import ltd.newbee.mall.entity.NewBeeMallGoods;
+import ltd.newbee.mall.entity.UserCheckedHistory;
 import ltd.newbee.mall.entity.Answer;
 import ltd.newbee.mall.util.PageQueryUtil;
 import ltd.newbee.mall.util.PageResult;
@@ -21,6 +22,7 @@ public interface NewBeeMallGoodsService {
 	int deleteAnswerById(List<Long> answerId);
 	void updateAnswerById(Map<Object, String> updateAnswer);
 	PageResult getAnswerPage(PageQueryUtil pageUtil);
+	void setUserCheckedHistory(UserCheckedHistory userCheckedHistory);
 
     /**
      * 后台分页

@@ -8,11 +8,13 @@
  */
 package ltd.newbee.mall.controller.mall;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.util.ObjectUtils;
@@ -25,12 +27,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import ltd.newbee.mall.common.Constants;
 import ltd.newbee.mall.common.NewBeeMallException;
 import ltd.newbee.mall.common.ServiceResultEnum;
 import ltd.newbee.mall.controller.vo.NewBeeMallGoodsDetailVO;
+import ltd.newbee.mall.controller.vo.NewBeeMallUserVO;
 import ltd.newbee.mall.controller.vo.SearchPageCategoryVO;
 import ltd.newbee.mall.entity.NewBeeMallGoods;
+import ltd.newbee.mall.entity.UserCheckedHistory;
 import ltd.newbee.mall.service.NewBeeMallCategoryService;
 import ltd.newbee.mall.service.NewBeeMallGoodsService;
 import ltd.newbee.mall.util.BeanUtil;
@@ -82,7 +88,7 @@ public class GoodsController {
     }
 
     @GetMapping("/goods/detail/{goodsId}")
-    public String detailPage(@PathVariable("goodsId") Long goodsId, HttpServletRequest request) {
+    public String detailPage(@PathVariable("goodsId") Long goodsId, HttpServletRequest request, HttpSession httpSession) {
         if (goodsId < 1) {
             NewBeeMallException.fail("参数异常");
         }
@@ -94,6 +100,15 @@ public class GoodsController {
         BeanUtil.copyProperties(goods, goodsDetailVO);
         goodsDetailVO.setGoodsCarouselList(goods.getGoodsCarousel().split(","));
         request.setAttribute("goodsDetail", goodsDetailVO);
+        if (Constants.MALL_USER_SESSION_KEY != null) {
+        	NewBeeMallUserVO user = (NewBeeMallUserVO) httpSession.getAttribute(Constants.MALL_USER_SESSION_KEY);
+        	UserCheckedHistory userCheckedHistory=new UserCheckedHistory();
+        	userCheckedHistory.setGoodsId(goodsId);
+        	userCheckedHistory.setUserId(user.getUserId());
+        	userCheckedHistory.setCheckTime(new Date());
+        	newBeeMallGoodsService.setUserCheckedHistory(userCheckedHistory);
+        }
+        
         return "mall/detail";
     }
     @RequestMapping(value = "/answers", method = RequestMethod.GET)

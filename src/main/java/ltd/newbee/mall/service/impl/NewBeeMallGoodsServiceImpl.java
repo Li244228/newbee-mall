@@ -18,6 +18,7 @@ import ltd.newbee.mall.entity.Answer;
 import ltd.newbee.mall.entity.Carousel;
 import ltd.newbee.mall.entity.GoodsCategory;
 import ltd.newbee.mall.entity.NewBeeMallGoods;
+import ltd.newbee.mall.entity.UserCheckedHistory;
 import ltd.newbee.mall.service.NewBeeMallGoodsService;
 import ltd.newbee.mall.util.BeanUtil;
 import ltd.newbee.mall.util.NewBeeMallUtils;
@@ -166,6 +167,10 @@ public class NewBeeMallGoodsServiceImpl implements NewBeeMallGoodsService {
         int total = goodsMapper.getTotalAnswer(pageUtil);
         PageResult pageResult = new PageResult(answerList, total, pageUtil.getLimit(), pageUtil.getPage());
         return pageResult;
+    }
+	
+	public void setUserCheckedHistory(UserCheckedHistory userCheckedHistory) {
+		goodsMapper.setUserCheckedHistory(userCheckedHistory);
     }
 
 }

@@ -202,6 +202,11 @@
             </if>
         </where>
     </select>
+    
+    <insert id="setUserCheckedHistory" parameterType="ltd.newbee.mall.entity.UserCheckedHistory">
+    	insert into tb_newbee_mall_user_browsing_history (goods_id, user_id, check_time)
+    	values (#{goodsId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{checkTime,jdbcType=TIMESTAMP})
+	</insert>
 
     <select id="selectByPrimaryKeys" resultMap="BaseResultMap">
         select
@@ -216,6 +221,7 @@
             #{id}
         </foreach>
         );
+
     </select>
     <select id="getTotalNewBeeMallGoods" parameterType="Map" resultType="int">
         select count(*) from tb_newbee_mall_goods_info

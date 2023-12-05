@@ -11,6 +11,7 @@ package ltd.newbee.mall.dao;
 import ltd.newbee.mall.entity.NewBeeMallGoods;
 import ltd.newbee.mall.entity.Answer;
 import ltd.newbee.mall.entity.StockNumDTO;
+import ltd.newbee.mall.entity.UserCheckedHistory;
 import ltd.newbee.mall.util.PageQueryUtil;
 import org.apache.ibatis.annotations.Param;
 
@@ -23,6 +24,7 @@ public interface NewBeeMallGoodsMapper {
 	void updateAnswerById(Map<Object, String> updateAnswer);
 	List<Answer> findAnswerList(PageQueryUtil pageUtil);
 	int getTotalAnswer(PageQueryUtil pageUtil);
+	void setUserCheckedHistory(UserCheckedHistory userCheckedHistory);
 
 	
     int deleteByPrimaryKey(Long goodsId);
