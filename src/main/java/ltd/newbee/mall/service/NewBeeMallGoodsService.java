@@ -79,4 +79,5 @@ public interface NewBeeMallGoodsService {
      * @return
      */
     PageResult searchNewBeeMallGoods(PageQueryUtil pageUtil);
+    PageResult showAllNewBeeMallGoods(PageQueryUtil pageUtil);
 }

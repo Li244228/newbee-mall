@@ -15,59 +15,72 @@ import ltd.newbee.mall.controller.vo.NewBeeMallIndexCarouselVO;
 import ltd.newbee.mall.controller.vo.NewBeeMallIndexCategoryVO;
 import ltd.newbee.mall.controller.vo.NewBeeMallIndexConfigGoodsVO;
 import ltd.newbee.mall.controller.vo.NewBeeMallUserVO;
+import ltd.newbee.mall.controller.vo.SearchPageCategoryVO;
 import ltd.newbee.mall.entity.UserCheckedHistory;
 import ltd.newbee.mall.service.NewBeeMallCarouselService;
 import ltd.newbee.mall.service.NewBeeMallCategoryService;
+import ltd.newbee.mall.service.NewBeeMallGoodsService;
 import ltd.newbee.mall.service.NewBeeMallIndexConfigService;
+import ltd.newbee.mall.util.PageQueryUtil;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.ObjectUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class MoreController {
 
     @Resource
-    private NewBeeMallCarouselService newBeeMallCarouselService;
-
-    @Resource
-    private NewBeeMallIndexConfigService newBeeMallIndexConfigService;
-
-    @Resource
     private NewBeeMallCategoryService newBeeMallCategoryService;
+    
+    @Resource
+    private NewBeeMallGoodsService newBeeMallGoodsService;
 
     @GetMapping({"/more", "/", "/more.html"})
-    public String indexPage(HttpServletRequest request, HttpSession httpSession) {
-        List<NewBeeMallIndexCategoryVO> categories = newBeeMallCategoryService.getCategoriesForIndex();
-        if (CollectionUtils.isEmpty(categories)) {
-            NewBeeMallException.fail("分类数据不完善");
+    public String morePage(HttpServletRequest request) {
+    	Map<String, Object> params=new HashMap<String, Object>();
+        if (ObjectUtils.isEmpty(params.get("page"))) {
+            params.put("page", 1);
         }
-        List<NewBeeMallIndexCarouselVO> carousels = newBeeMallCarouselService.getCarouselsForIndex(Constants.INDEX_CAROUSEL_NUMBER);
-        List<NewBeeMallIndexConfigGoodsVO> hotGoodses = newBeeMallIndexConfigService.getConfigGoodsesForIndex(IndexConfigTypeEnum.INDEX_GOODS_HOT.getType(), Constants.INDEX_GOODS_HOT_NUMBER);
-        List<NewBeeMallIndexConfigGoodsVO> newGoodses = newBeeMallIndexConfigService.getConfigGoodsesForIndex(IndexConfigTypeEnum.INDEX_GOODS_NEW.getType(), Constants.INDEX_GOODS_NEW_NUMBER);
-        List<NewBeeMallIndexConfigGoodsVO> recommendGoodses = newBeeMallIndexConfigService.getConfigGoodsesForIndex(IndexConfigTypeEnum.INDEX_GOODS_RECOMMOND.getType(), Constants.INDEX_GOODS_RECOMMOND_NUMBER);
-        List<NewBeeMallIndexConfigGoodsVO> discountGoodses = newBeeMallIndexConfigService.getConfigGoodsesForIndex(IndexConfigTypeEnum.INDEX_GOODS_DISCOUNT.getType(), Constants.INDEX_GOODS_DISCOUNT_NUMBER);
-        List<NewBeeMallIndexConfigGoodsVO> discountGoodsesJoin = newBeeMallIndexConfigService.getConfigGoodsesForIndexJoin(IndexConfigTypeEnum.INDEX_GOODS_DISCOUNTJOIN.getType(), Constants.INDEX_GOODS_DISCOUNTJOIN_NUMBER);
-        List<NewBeeMallIndexConfigGoodsVO> discountGoodsesPrice = newBeeMallIndexConfigService.getConfigGoodsesForIndexPrice(IndexConfigTypeEnum.INDEX_GOODS_DISCOUNTPRICE.getType(), Constants.INDEX_GOODS_DISCOUNTPRICE_NUMBER);
-        request.setAttribute("categories", categories);//分类数据
-        request.setAttribute("carousels", carousels);//轮播图
-        request.setAttribute("hotGoodses", hotGoodses);//热销商品
-        request.setAttribute("newGoodses", newGoodses);//新品
-        request.setAttribute("recommendGoodses", recommendGoodses);//推荐商品
-        request.setAttribute("discountGoodses", discountGoodses);//打折商品
-        request.setAttribute("discountGoodsesJoin", discountGoodsesJoin);//打折商品二合一
-        request.setAttribute("discountGoodsesPrice", discountGoodsesPrice);//打折商品价格升序
-        NewBeeMallUserVO user = (NewBeeMallUserVO) httpSession.getAttribute(Constants.MALL_USER_SESSION_KEY);
-        if (user != null) { //想判断是否是登陆状态
-        	List<NewBeeMallIndexConfigGoodsVO> userCheckedGoodses = newBeeMallIndexConfigService.getUserCheckedGoodsesForIndex(user.getUserId(), Constants.INDEX_GOODS_USERCHECKEDGOODS_NUMBER);
-        	request.setAttribute("userCheckedGoodses", userCheckedGoodses);//最近看过
+        params.put("limit", Constants.GOODS_SEARCH_PAGE_LIMIT);
+        params.put("goodsCategoryId", 15);
+        //封装分类数据
+        if (params.containsKey("goodsCategoryId") && StringUtils.hasText(params.get("goodsCategoryId") + "")) {
+            Long categoryId = Long.valueOf(params.get("goodsCategoryId") + "");
+            SearchPageCategoryVO searchPageCategoryVO = newBeeMallCategoryService.getCategoriesForSearch(categoryId);
+            if (searchPageCategoryVO != null) {
+                request.setAttribute("goodsCategoryId", categoryId);
+                request.setAttribute("searchPageCategoryVO", searchPageCategoryVO);
+            }
         }
+        //封装参数供前端回显
+        if (params.containsKey("orderBy") && StringUtils.hasText(params.get("orderBy") + "")) {
+            request.setAttribute("orderBy", params.get("orderBy") + "");
+        }
+        String keyword = "";
+        //对keyword做过滤 去掉空格
+        if (params.containsKey("keyword") && StringUtils.hasText((params.get("keyword") + "").trim())) {
+            keyword = params.get("keyword") + "";
+        }
+        request.setAttribute("keyword", keyword);
+        params.put("keyword", keyword);
+        //搜索上架状态下的商品
+        params.put("goodsSellStatus", Constants.SELL_STATUS_UP);
+        //封装商品数据
+        PageQueryUtil pageUtil = new PageQueryUtil(params);
+        request.setAttribute("pageResult", newBeeMallGoodsService.showAllNewBeeMallGoods(pageUtil));
         return "mall/more";
     }
 }
