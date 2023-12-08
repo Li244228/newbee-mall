@@ -226,6 +226,9 @@
             </if>
         </where>
     </select>
+    <select id="showAllNewBeeMallGoods" parameterType="Map" resultType="int">
+        select count(*) from tb_newbee_mall_goods_info
+    </select>
     
     <insert id="setUserCheckedHistory" parameterType="ltd.newbee.mall.entity.UserCheckedHistory">
     	insert into tb_newbee_mall_user_browsing_history (goods_id, user_id, check_time)

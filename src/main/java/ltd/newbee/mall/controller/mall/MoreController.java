@@ -55,7 +55,7 @@ public class MoreController {
             params.put("page", 1);
         }
         params.put("limit", Constants.GOODS_SEARCH_PAGE_LIMIT);
-        params.put("goodsCategoryId", 15);
+        params.put("goodsCategoryId", 27);
         //封装分类数据
         if (params.containsKey("goodsCategoryId") && StringUtils.hasText(params.get("goodsCategoryId") + "")) {
             Long categoryId = Long.valueOf(params.get("goodsCategoryId") + "");
