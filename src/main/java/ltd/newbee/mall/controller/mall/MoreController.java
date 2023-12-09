@@ -49,8 +49,7 @@ public class MoreController {
     private NewBeeMallGoodsService newBeeMallGoodsService;
 
     @GetMapping({"/more", "/", "/more.html"})
-    public String morePage(HttpServletRequest request) {
-    	Map<String, Object> params=new HashMap<String, Object>();
+    public String morePage(@RequestParam Map<String, Object> params, HttpServletRequest request) {
         if (ObjectUtils.isEmpty(params.get("page"))) {
             params.put("page", 1);
         }
@@ -81,6 +80,8 @@ public class MoreController {
         //封装商品数据
         PageQueryUtil pageUtil = new PageQueryUtil(params);
         request.setAttribute("pageResult", newBeeMallGoodsService.showAllNewBeeMallGoods(pageUtil));
+        System.out.print(pageUtil);
+        System.out.print("************************************");
         return "mall/more";
     }
 }

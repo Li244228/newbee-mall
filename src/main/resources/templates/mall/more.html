@@ -6,8 +6,8 @@
 <body>
 <header th:replace="mall/header::header-fragment"></header>
 <nav th:replace="mall/header::nav-fragment"></nav>
-<div id="more">
-	<div class="main center">
+<div class="moregoods center">
+    <div class="goods center">
         <th:block th:if="${#lists.isEmpty(pageResult.list)}">
             <img style="margin-top: 16px;padding: 16px 20px;" th:src="@{/mall/image/null-content.png}">
         </th:block>
@@ -29,23 +29,23 @@
         <div class="page_wrap">
             <th:block th:if="${null != pageResult and !#lists.isEmpty(pageResult.list)}">
             <span class="page_span1">
-                <a th:href="@{${pageResult.currPage==1}?'##':'page=' + ${pageResult.currPage-1}+'&goodsCategoryId='+${goodsCategoryId==null?'':goodsCategoryId}+'&orderBy='+${orderBy==null?'':orderBy}}">
+                <a th:href="@{${pageResult.currPage==1}?'##':'/more?'+'page=' + ${pageResult.currPage-1}+'&goodsCategoryId='+${goodsCategoryId==null?'':goodsCategoryId}+'&orderBy='+${orderBy==null?'':orderBy}}">
                                     < 上一页
                 </a>
                 <th:block th:if="${pageResult.currPage-2 >=1}"><a
-                		th:href="@{'/search?keyword='+${keyword==null?'':keyword}+'&page=' + ${pageResult.currPage-2}+'&goodsCategoryId='+${goodsCategoryId==null?'':goodsCategoryId}+'&orderBy='+${orderBy==null?'':orderBy}}"
+                		th:href="@{'/more?'+'page=' + ${pageResult.currPage-2}+'&goodsCategoryId='+${goodsCategoryId==null?'':goodsCategoryId}+'&orderBy='+${orderBy==null?'':orderBy}}"
                         th:text="${pageResult.currPage -2}">1</a></th:block>
                 <th:block th:if="${pageResult.currPage-1 >=1}"><a
-                        th:href="@{'/search?keyword='+${keyword==null?'':keyword}+'&page=' + ${pageResult.currPage-1}+'&goodsCategoryId='+${goodsCategoryId==null?'':goodsCategoryId}+'&orderBy='+${orderBy==null?'':orderBy}}"
+                        th:href="@{'/more?'+'page=' + ${pageResult.currPage-1}+'&goodsCategoryId='+${goodsCategoryId==null?'':goodsCategoryId}+'&orderBy='+${orderBy==null?'':orderBy}}"
                         th:text="${pageResult.currPage -1}">1</a></th:block>
                 <a href="##" class="active" th:text="${pageResult.currPage}">1</a>
                 <th:block th:if="${pageResult.currPage+1<=pageResult.totalPage}"><a
-                        th:href="@{'/search?keyword='+${keyword==null?'':keyword}+'&page=' + ${pageResult.currPage+1}+'&goodsCategoryId='+${goodsCategoryId==null?'':goodsCategoryId}+'&orderBy='+${orderBy==null?'':orderBy}}"
+                        th:href="@{'/more?'+'page=' + ${pageResult.currPage+1}+'&goodsCategoryId='+${goodsCategoryId==null?'':goodsCategoryId}+'&orderBy='+${orderBy==null?'':orderBy}}"
                         th:text="${pageResult.currPage +1}">1</a></th:block>
                 <th:block th:if="${pageResult.currPage+2<=pageResult.totalPage}"><a
-                        th:href="@{'/search?keyword='+${keyword==null?'':keyword}+'&page=' + ${pageResult.currPage+2}+'&goodsCategoryId='+${goodsCategoryId==null?'':goodsCategoryId}+'&orderBy='+${orderBy==null?'':orderBy}}"
+                        th:href="@{'/more?'+'page=' + ${pageResult.currPage+2}+'&goodsCategoryId='+${goodsCategoryId==null?'':goodsCategoryId}+'&orderBy='+${orderBy==null?'':orderBy}}"
                         th:text="${pageResult.currPage +2}">1</a></th:block>
-                 <a th:href="@{${pageResult.currPage>=pageResult.totalPage}?'##':'page=' + ${pageResult.currPage+1}+'&goodsCategoryId='+${goodsCategoryId==null?'':goodsCategoryId}+'&orderBy='+${orderBy==null?'':orderBy}}">
+                 <a th:href="@{${pageResult.currPage>=pageResult.totalPage}?'##':'/more?'+'page=' + ${pageResult.currPage+1}+'&orderBy='+${orderBy==null?'':orderBy}}">
                                     下一页 >
                  </a>
 			</span>
