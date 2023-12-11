@@ -25,6 +25,8 @@ public interface NewBeeMallGoodsMapper {
 	List<Answer> findAnswerList(PageQueryUtil pageUtil);
 	int getTotalAnswer(PageQueryUtil pageUtil);
 	void setUserCheckedHistory(UserCheckedHistory userCheckedHistory);
+	Map<String, Object> getGoodsColumn(String skuId);
+	Map<String, Object> getSkuColumn(String skuId);
 
 	
     int deleteByPrimaryKey(Long goodsId);

@@ -141,4 +141,11 @@ public class GoodsController {
         PageQueryUtil pageUtil = new PageQueryUtil(params);
         return ResultGenerator.genSuccessResult(newBeeMallGoodsService.getAnswerPage(pageUtil));
     }
+    
+    @RequestMapping(value = "/goods/page", method = RequestMethod.GET)
+    @ResponseBody
+    public Result goodsDetailPage(@RequestParam String skuId) {
+    	Map<String, Object> goodsPage=newBeeMallGoodsService.getGoodsPage(skuId);
+        return ResultGenerator.genSuccessResult(goodsPage);
+    }
 }

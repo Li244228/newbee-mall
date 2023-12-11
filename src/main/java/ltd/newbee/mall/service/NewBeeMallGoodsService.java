@@ -23,6 +23,7 @@ public interface NewBeeMallGoodsService {
 	void updateAnswerById(Map<Object, String> updateAnswer);
 	PageResult getAnswerPage(PageQueryUtil pageUtil);
 	void setUserCheckedHistory(UserCheckedHistory userCheckedHistory);
+	Map<String, Object> getGoodsPage(String skuId);
 
     /**
      * 后台分页

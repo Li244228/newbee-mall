@@ -180,5 +180,15 @@ public class NewBeeMallGoodsServiceImpl implements NewBeeMallGoodsService {
 	public void setUserCheckedHistory(UserCheckedHistory userCheckedHistory) {
 		goodsMapper.setUserCheckedHistory(userCheckedHistory);
     }
+	
+	@Override
+    public Map<String, Object> getGoodsPage(String skuId) {
+		Map<String, Object> goodsColumn=goodsMapper.getGoodsColumn(skuId);
+		Map<String, Object> skuColumn=goodsMapper.getSkuColumn(skuId);
+		for (Map.Entry<String, Object> entry : skuColumn.entrySet()) {
+			goodsColumn.put(entry.getKey(), entry.getValue());
+		}
+        return goodsColumn;
+    }
 
 }
