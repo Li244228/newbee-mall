@@ -36,9 +36,11 @@ import ltd.newbee.mall.controller.vo.NewBeeMallGoodsDetailVO;
 import ltd.newbee.mall.controller.vo.NewBeeMallUserVO;
 import ltd.newbee.mall.controller.vo.SearchPageCategoryVO;
 import ltd.newbee.mall.entity.NewBeeMallGoods;
+import ltd.newbee.mall.entity.SkuColumnMangementEntity;
 import ltd.newbee.mall.entity.UserCheckedHistory;
 import ltd.newbee.mall.service.NewBeeMallCategoryService;
 import ltd.newbee.mall.service.NewBeeMallGoodsService;
+import ltd.newbee.mall.service.SkuColumnMangementService;
 import ltd.newbee.mall.util.BeanUtil;
 import ltd.newbee.mall.util.PageQueryUtil;
 import ltd.newbee.mall.util.Result;
@@ -52,6 +54,8 @@ public class GoodsController {
     private NewBeeMallGoodsService newBeeMallGoodsService;
     @Resource
     private NewBeeMallCategoryService newBeeMallCategoryService;
+    @Resource
+    private SkuColumnMangementService skuColumnMangementService;
 
     @GetMapping({"/search", "/search.html"})
     public String searchPage(@RequestParam Map<String, Object> params, HttpServletRequest request) {
@@ -141,11 +145,10 @@ public class GoodsController {
         PageQueryUtil pageUtil = new PageQueryUtil(params);
         return ResultGenerator.genSuccessResult(newBeeMallGoodsService.getAnswerPage(pageUtil));
     }
-    
-    @RequestMapping(value = "/goods/page", method = RequestMethod.GET)
+    @RequestMapping(value = "/goods/sku", method = RequestMethod.GET)
     @ResponseBody
-    public Result goodsDetailPage(@RequestParam String skuId) {
-    	Map<String, Object> goodsPage=newBeeMallGoodsService.getGoodsPage(skuId);
-        return ResultGenerator.genSuccessResult(goodsPage);
+    public Result goodsSku(@RequestParam Map<String, String> paramList) {
+        List<SkuColumnMangementEntity> skuCmeList = skuColumnMangementService.selectSkuColumnMangement(paramList);
+        return ResultGenerator.genSuccessResult(newBeeMallGoodsService.getAnswerPage(pageUtil));
     }
 }

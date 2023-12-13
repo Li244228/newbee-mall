@@ -9,6 +9,7 @@
 package ltd.newbee.mall.dao;
 
 import ltd.newbee.mall.entity.NewBeeMallGoods;
+import ltd.newbee.mall.entity.SkuColumnMangementEntity;
 import ltd.newbee.mall.entity.Answer;
 import ltd.newbee.mall.entity.StockNumDTO;
 import ltd.newbee.mall.entity.UserCheckedHistory;
@@ -25,8 +26,6 @@ public interface NewBeeMallGoodsMapper {
 	List<Answer> findAnswerList(PageQueryUtil pageUtil);
 	int getTotalAnswer(PageQueryUtil pageUtil);
 	void setUserCheckedHistory(UserCheckedHistory userCheckedHistory);
-	Map<String, Object> getGoodsColumn(String skuId);
-	Map<String, Object> getSkuColumn(String skuId);
 
 	
     int deleteByPrimaryKey(Long goodsId);
@@ -46,6 +45,10 @@ public interface NewBeeMallGoodsMapper {
     int updateByPrimaryKey(NewBeeMallGoods record);
 
     List<NewBeeMallGoods> findNewBeeMallGoodsList(PageQueryUtil pageUtil);
+    
+    int getTotalNewBeeMallGoods(PageQueryUtil pageUtil);
+    
+    List<SkuColumnMangementEntity> selectSkuColumnMangement(List<String> column);
 
     int showAllNewBeeMallGoods(PageQueryUtil pageUtil);
 

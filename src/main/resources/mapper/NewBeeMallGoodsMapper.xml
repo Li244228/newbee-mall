@@ -230,16 +230,12 @@
         select count(*) from tb_newbee_mall_goods_info
     </select>
     
-    <select id="getGoodsColumn" parameterType="string" resultType="Map">
-        select column1, column2, column3 from goods
-        where sku_id = #{skuId}
-    </select>
-    
-    
-    <select id="getSkuColumn" parameterType="string" resultType="Map">
-        select column1, column2, column3 from sku
-        join sku_column_mangement
-        where sku_id = #{skuId}
+    <select id="selectSkuColumnMangement" parameterType="list" resultType="ltd.newbee.mall.entity.SkuColumnMangementEntity">
+        select sku_text from sku_column_mangement
+        where sku_text in
+        <foreach item="column" collection="column" separator="," open="(" close=")">
+       #{column, jdbcType=VARCHAR}
+       </foreach>
     </select>
     
     <insert id="setUserCheckedHistory" parameterType="ltd.newbee.mall.entity.UserCheckedHistory">
