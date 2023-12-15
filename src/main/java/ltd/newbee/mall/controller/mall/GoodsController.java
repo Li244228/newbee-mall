@@ -16,6 +16,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
@@ -37,11 +38,14 @@ import ltd.newbee.mall.controller.vo.NewBeeMallUserVO;
 import ltd.newbee.mall.controller.vo.SearchPageCategoryVO;
 import ltd.newbee.mall.entity.NewBeeMallGoods;
 import ltd.newbee.mall.entity.SkuColumnMangementEntity;
+import ltd.newbee.mall.entity.SkuEntity;
 import ltd.newbee.mall.entity.UserCheckedHistory;
 import ltd.newbee.mall.service.NewBeeMallCategoryService;
 import ltd.newbee.mall.service.NewBeeMallGoodsService;
 import ltd.newbee.mall.service.SkuColumnMangementService;
+import ltd.newbee.mall.service.SkuService;
 import ltd.newbee.mall.util.BeanUtil;
+import org.apache.commons.beanutils.PropertyUtils;
 import ltd.newbee.mall.util.PageQueryUtil;
 import ltd.newbee.mall.util.Result;
 import ltd.newbee.mall.util.ResultGenerator;
@@ -56,6 +60,8 @@ public class GoodsController {
     private NewBeeMallCategoryService newBeeMallCategoryService;
     @Resource
     private SkuColumnMangementService skuColumnMangementService;
+    @Resource
+    private SkuService skuService;
 
     @GetMapping({"/search", "/search.html"})
     public String searchPage(@RequestParam Map<String, Object> params, HttpServletRequest request) {
@@ -149,6 +155,27 @@ public class GoodsController {
     @ResponseBody
     public Result goodsSku(@RequestParam Map<String, String> paramList) {
         List<SkuColumnMangementEntity> skuCmeList = skuColumnMangementService.selectSkuColumnMangement(paramList);
-        return ResultGenerator.genSuccessResult(newBeeMallGoodsService.getAnswerPage(pageUtil));
+        List<SkuEntity> skuList = skuService.selectSku(paramList);
+        int i=0, j=0;
+        for(SkuEntity sku : skuList) {
+        	for(SkuColumnMangementEntity skuCme : skuCmeList) {
+        		String col = sku.getColumn1();
+        		for(String key : paramList.keySet()) {
+        			if(key == skuCme.getColumn1()) {
+        				if(col == paramList.get(key)) {
+        					j++;
+        				}
+        			}
+        		}
+        	}
+        	if(j == skuCmeList.size()) {
+        		break;
+        	}
+        	i++;
+        }
+        System.out.print("**********************");
+        System.out.print(skuList);
+        System.out.print(skuCmeList);
+        return ResultGenerator.genSuccessResult(skuList.get(0));
     }
 }

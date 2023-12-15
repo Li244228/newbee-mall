@@ -232,10 +232,11 @@
     
     <select id="selectSkuColumnMangement" parameterType="list" resultType="ltd.newbee.mall.entity.SkuColumnMangementEntity">
         select sku_text from sku_column_mangement
-        where sku_text in
-        <foreach item="column" collection="column" separator="," open="(" close=")">
-       #{column, jdbcType=VARCHAR}
-       </foreach>
+        where sku_text = #{column, jdbcType=VARCHAR}
+    </select>
+    <select id="selectSku" parameterType="list" resultType="ltd.newbee.mall.entity.SkuEntity">
+        select column1, column2, column3 from sku
+        where column1 = #{text, jdbcType=VARCHAR} and column2 = #{text, jdbcType=VARCHAR} and column3 = #{text, jdbcType=VARCHAR}
     </select>
     
     <insert id="setUserCheckedHistory" parameterType="ltd.newbee.mall.entity.UserCheckedHistory">

@@ -10,6 +10,7 @@ package ltd.newbee.mall.dao;
 
 import ltd.newbee.mall.entity.NewBeeMallGoods;
 import ltd.newbee.mall.entity.SkuColumnMangementEntity;
+import ltd.newbee.mall.entity.SkuEntity;
 import ltd.newbee.mall.entity.Answer;
 import ltd.newbee.mall.entity.StockNumDTO;
 import ltd.newbee.mall.entity.UserCheckedHistory;
@@ -49,6 +50,7 @@ public interface NewBeeMallGoodsMapper {
     int getTotalNewBeeMallGoods(PageQueryUtil pageUtil);
     
     List<SkuColumnMangementEntity> selectSkuColumnMangement(List<String> column);
+    List<SkuEntity> selectSku(List<String> text);
 
     int showAllNewBeeMallGoods(PageQueryUtil pageUtil);
 
