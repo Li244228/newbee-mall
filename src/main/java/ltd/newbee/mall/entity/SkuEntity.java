@@ -8,36 +8,46 @@
  */
 package ltd.newbee.mall.entity;
 
+import java.util.List;
+
 public class SkuEntity {
 
-	private String column1;
-    private String column2;
-    private String column3;
-    private String column4;
+	private String size;
+    private String color;
+    private List<String> img;
     
-	public String getColumn1() {
-		return column1;
+    public List<String> getImg() {
+		return img;
 	}
-	public void setColumn1(String column1) {
-		this.column1 = column1;
+	public void setImg(List<String> img) {
+		this.img = img;
 	}
-	public String getColumn2() {
-		return column2;
+	private int stock;
+    private String skuId;
+    
+	public String getSkuId() {
+		return skuId;
 	}
-	public void setColumn2(String column2) {
-		this.column2 = column2;
+	public void setSkuId(String skuId) {
+		this.skuId = skuId;
 	}
-	public String getColumn3() {
-		return column3;
+	public int getStock() {
+		return stock;
 	}
-	public void setColumn3(String column3) {
-		this.column3 = column3;
+	public void setStock(int stock) {
+		this.stock = stock;
 	}
-	public String getColumn4() {
-		return column4;
+	public String getSize() {
+		return size;
 	}
-	public void setColumn4(String column4) {
-		this.column4 = column4;
+	public void setSize(String size) {
+		this.size = size;
 	}
-
+	public String getColor() {
+		return color;
+	}
+	public void setColor(String color) {
+		this.color = color;
+	}
+    
 }

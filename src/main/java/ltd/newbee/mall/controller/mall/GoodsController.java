@@ -156,6 +156,7 @@ public class GoodsController {
     public Result goodsSku(@RequestParam Map<String, String> paramList) {
         List<SkuColumnMangementEntity> skuCmeList = skuColumnMangementService.selectSkuColumnMangement(paramList);
         List<SkuEntity> skuList = skuService.selectSku(paramList);
+        
         int i=0, j=0;
         for(SkuEntity sku : skuList) {
         	for(SkuColumnMangementEntity skuCme : skuCmeList) {
@@ -177,5 +178,12 @@ public class GoodsController {
         System.out.print(skuList);
         System.out.print(skuCmeList);
         return ResultGenerator.genSuccessResult(skuList.get(0));
+    }
+    
+    @RequestMapping(value = "/goods/sku/settled", method = RequestMethod.GET)
+    @ResponseBody
+    public Result goodsSkuSettled(@RequestParam Map<String, String> paramList) {
+        SkuEntity sku = skuService.selectSku(paramList);
+        return ResultGenerator.genSuccessResult(sku);
     }
 }

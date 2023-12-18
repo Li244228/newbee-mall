@@ -9,12 +9,11 @@
 package ltd.newbee.mall.service;
 
 
-import java.util.List;
 import java.util.Map;
 import ltd.newbee.mall.entity.SkuEntity;
 
 public interface SkuService {
 	
-	List<SkuEntity> selectSku(Map<String, String> paramList);
+	SkuEntity selectSku(Map<String, String> paramList);
 
 }

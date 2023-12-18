@@ -234,9 +234,17 @@
         select sku_text from sku_column_mangement
         where sku_text = #{column, jdbcType=VARCHAR}
     </select>
-    <select id="selectSku" parameterType="list" resultType="ltd.newbee.mall.entity.SkuEntity">
-        select column1, column2, column3 from sku
-        where column1 = #{text, jdbcType=VARCHAR} and column2 = #{text, jdbcType=VARCHAR} and column3 = #{text, jdbcType=VARCHAR}
+    <select id="selectSkuId" parameterType="Map" resultType="String">
+        select sku_id from sku
+        where size = #{size, jdbcType=VARCHAR} and color = #{color, jdbcType=VARCHAR} and goods_id = #{goodsId, jdbcType=BIGINT}
+    </select>
+    <select id="selectSkuById" parameterType="String" resultType="ltd.newbee.mall.entity.SkuEntity">
+        select stock, size, color from sku
+        where sku.sku_id = #{skuId, jdbcType=VARCHAR} 
+    </select>
+    <select id="selectImgById" parameterType="String" resultType="java.lang.String">
+        select img from sku_img
+        where sku_id = #{skuId, jdbcType=VARCHAR} 
     </select>
     
     <insert id="setUserCheckedHistory" parameterType="ltd.newbee.mall.entity.UserCheckedHistory">

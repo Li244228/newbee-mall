@@ -28,16 +28,13 @@ public class SkuServiceImpl implements SkuService {
     private NewBeeMallGoodsMapper goodsMapper;
 
     @Override
-    public List<SkuEntity> selectSku(Map<String, String> paramList) {
-    	List<SkuEntity> skuList = new ArrayList<>();
-        List<String> column=new ArrayList<>();
-        List<String> text=new ArrayList<>();
-        for(Map.Entry<String, String> entry : paramList.entrySet()) {
-        	column.add(entry.getKey());
-        	text.add(entry.getValue());
-        }
-        skuList=goodsMapper.selectSku(text);
-        return skuList;
+    public SkuEntity selectSku(Map<String, String> paramList) {
+        String skuId = goodsMapper.selectSkuId(paramList);
+        SkuEntity sku = goodsMapper.selectSkuById(skuId);
+        List<String> img = goodsMapper.selectImgById(skuId);
+        sku.setSkuId(skuId);
+        sku.setImg(img);
+        return sku;
     }
 	
 }

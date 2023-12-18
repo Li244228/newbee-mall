@@ -50,7 +50,9 @@ public interface NewBeeMallGoodsMapper {
     int getTotalNewBeeMallGoods(PageQueryUtil pageUtil);
     
     List<SkuColumnMangementEntity> selectSkuColumnMangement(List<String> column);
-    List<SkuEntity> selectSku(List<String> text);
+    String selectSkuId(Map<String, String> paramList);
+    SkuEntity selectSkuById(String skuId);
+    List<String> selectImgById(String skuId);
 
     int showAllNewBeeMallGoods(PageQueryUtil pageUtil);
 
