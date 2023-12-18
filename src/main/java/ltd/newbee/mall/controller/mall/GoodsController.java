@@ -186,4 +186,14 @@ public class GoodsController {
         SkuEntity sku = skuService.selectSku(paramList);
         return ResultGenerator.genSuccessResult(sku);
     }
+    
+    @RequestMapping(value = "/goods/comment", method = RequestMethod.GET)
+    @ResponseBody
+    public Result goodsComment(@RequestParam Map<String, Object> params) {
+    	if (ObjectUtils.isEmpty(params.get("page")) || ObjectUtils.isEmpty(params.get("limit"))) {
+            return ResultGenerator.genFailResult("参数异常！");
+        }
+        PageQueryUtil pageUtil = new PageQueryUtil(params);
+        return ResultGenerator.genSuccessResult(newBeeMallGoodsService.getCommentPage(pageUtil));
+    }
 }

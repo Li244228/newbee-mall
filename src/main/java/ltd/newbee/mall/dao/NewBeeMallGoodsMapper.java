@@ -12,6 +12,7 @@ import ltd.newbee.mall.entity.NewBeeMallGoods;
 import ltd.newbee.mall.entity.SkuColumnMangementEntity;
 import ltd.newbee.mall.entity.SkuEntity;
 import ltd.newbee.mall.entity.Answer;
+import ltd.newbee.mall.entity.Comment;
 import ltd.newbee.mall.entity.StockNumDTO;
 import ltd.newbee.mall.entity.UserCheckedHistory;
 import ltd.newbee.mall.util.PageQueryUtil;
@@ -27,6 +28,10 @@ public interface NewBeeMallGoodsMapper {
 	List<Answer> findAnswerList(PageQueryUtil pageUtil);
 	int getTotalAnswer(PageQueryUtil pageUtil);
 	void setUserCheckedHistory(UserCheckedHistory userCheckedHistory);
+	List<Comment> findCommentList(PageQueryUtil pageUtil);
+	int getTotalComment(PageQueryUtil pageUtil);
+	List<List<Long>> findLikeUserId(List<Long> commentId);
+	List<Long> selectCommentId(PageQueryUtil pageUtil);
 
 	
     int deleteByPrimaryKey(Long goodsId);

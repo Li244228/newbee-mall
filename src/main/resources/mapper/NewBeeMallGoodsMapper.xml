@@ -93,6 +93,32 @@
         where is_deleted = 0
     </select>
     
+    <select id="findCommentList" parameterType="Map" resultType="ltd.newbee.mall.entity.Comment">
+        select comment_id, user_id, goods_id, time, comment
+        from comment
+        where goods_id = #{goodsId,jdbcType=BIGINT}
+        order by time desc
+        <if test="start!=null and limit!=null">
+            limit #{start},#{limit}
+        </if>
+    </select>
+    <select id="getTotalComment" parameterType="Map" resultType="int">
+        select count(*) from comment
+    </select>
+    <select id="findLikeUserId" parameterType="long" resultType="long">
+        select like_user_id
+        from comment_like
+        where comment_id in
+        <foreach item="commentId" collection="commentId" separator="," open="(" close=")">
+			#{commentId, jdbcType=BIGINT}
+       </foreach>
+    </select>
+    <select id="selectCommentId" parameterType="Map" resultType="long">
+        select comment_id
+        from comment
+        where goods_id = #{goodsId,jdbcType=BIGINT}
+    </select>
+    
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
         select
         <include refid="Base_Column_List"/>

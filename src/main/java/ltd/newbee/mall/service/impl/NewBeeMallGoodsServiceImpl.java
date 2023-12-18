@@ -16,6 +16,7 @@ import ltd.newbee.mall.dao.GoodsCategoryMapper;
 import ltd.newbee.mall.dao.NewBeeMallGoodsMapper;
 import ltd.newbee.mall.entity.Answer;
 import ltd.newbee.mall.entity.Carousel;
+import ltd.newbee.mall.entity.Comment;
 import ltd.newbee.mall.entity.GoodsCategory;
 import ltd.newbee.mall.entity.NewBeeMallGoods;
 import ltd.newbee.mall.entity.UserCheckedHistory;
@@ -182,13 +183,16 @@ public class NewBeeMallGoodsServiceImpl implements NewBeeMallGoodsService {
     }
 	
 	@Override
-    public Map<String, Object> getGoodsPage(String skuId) {
-		Map<String, Object> goodsColumn=goodsMapper.getGoodsColumn(skuId);
-		Map<String, Object> skuColumn=goodsMapper.getSkuColumn(skuId);
-		for (Map.Entry<String, Object> entry : skuColumn.entrySet()) {
-			goodsColumn.put(entry.getKey(), entry.getValue());
-		}
-        return goodsColumn;
+    public PageResult getCommentPage(PageQueryUtil pageUtil) {
+        List<Comment> commentList = goodsMapper.findCommentList(pageUtil);
+        List<Long> commentId = goodsMapper.selectCommentId(pageUtil);
+        List<List<Long>> likeUserId = goodsMapper.findLikeUserId(commentId);
+        for (int i = 0; i < commentList.size(); i++) {
+        	commentList.get(i).setLikeUserId(likeUserId.get(i));
+        }
+        int total = goodsMapper.getTotalComment(pageUtil);
+        PageResult pageResult = new PageResult(commentList, total, pageUtil.getLimit(), pageUtil.getPage());
+        return pageResult;
     }
 
 }
