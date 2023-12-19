@@ -108,15 +108,18 @@
     <select id="findLikeUserId" parameterType="long" resultType="long">
         select like_user_id
         from comment_like
-        where comment_id in
-        <foreach item="commentId" collection="commentId" separator="," open="(" close=")">
-			#{commentId, jdbcType=BIGINT}
-       </foreach>
+        where comment_id = #{commentId, jdbcType=BIGINT}
     </select>
     <select id="selectCommentId" parameterType="Map" resultType="long">
         select comment_id
         from comment
         where goods_id = #{goodsId,jdbcType=BIGINT}
+        order by time desc
+    </select>
+    <select id="getLikesCount" parameterType="java.lang.Long" resultType="int">
+        select count(like_user_id)
+        from comment_like
+        where comment_id = #{commentId, jdbcType=BIGINT}
     </select>
     
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">

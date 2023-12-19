@@ -30,8 +30,9 @@ public interface NewBeeMallGoodsMapper {
 	void setUserCheckedHistory(UserCheckedHistory userCheckedHistory);
 	List<Comment> findCommentList(PageQueryUtil pageUtil);
 	int getTotalComment(PageQueryUtil pageUtil);
-	List<List<Long>> findLikeUserId(List<Long> commentId);
+	List<Long> findLikeUserId(Long commentId);
 	List<Long> selectCommentId(PageQueryUtil pageUtil);
+	int getLikesCount(Long commentId);
 
 	
     int deleteByPrimaryKey(Long goodsId);

@@ -186,9 +186,16 @@ public class NewBeeMallGoodsServiceImpl implements NewBeeMallGoodsService {
     public PageResult getCommentPage(PageQueryUtil pageUtil) {
         List<Comment> commentList = goodsMapper.findCommentList(pageUtil);
         List<Long> commentId = goodsMapper.selectCommentId(pageUtil);
-        List<List<Long>> likeUserId = goodsMapper.findLikeUserId(commentId);
+        List<List<Long>> likeUserIdList = new ArrayList<List<Long>>();
+        List<Integer> likesCountList = new ArrayList<Integer>();
+        for(Long cmtId : commentId) {
+        	List<Long> likeUserId = goodsMapper.findLikeUserId(cmtId);
+        	likesCountList.add(goodsMapper.getLikesCount(cmtId));
+        	likeUserIdList.add(likeUserId);
+        }
         for (int i = 0; i < commentList.size(); i++) {
-        	commentList.get(i).setLikeUserId(likeUserId.get(i));
+        	commentList.get(i).setLikeUserId(likeUserIdList.get(i));
+        	commentList.get(i).setLikesCount(likesCountList.get(i));
         }
         int total = goodsMapper.getTotalComment(pageUtil);
         PageResult pageResult = new PageResult(commentList, total, pageUtil.getLimit(), pageUtil.getPage());

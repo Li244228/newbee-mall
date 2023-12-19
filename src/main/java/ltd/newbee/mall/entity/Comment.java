@@ -20,9 +20,15 @@ public class Comment {
 	private String comment;
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date time;
+	private int likesCount;
 	private List<Long> likeUserId;
-    
-
+	
+	public int getLikesCount() {
+		return likesCount;
+	}
+	public void setLikesCount(int likesCount) {
+		this.likesCount = likesCount;
+	}
 	public List<Long> getLikeUserId() {
 		return likeUserId;
 	}
