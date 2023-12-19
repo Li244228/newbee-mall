@@ -14,7 +14,8 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class Comment {
-
+	
+	private long goodsId;
 	private long commentId;
     private long userId;
 	private String comment;
@@ -23,6 +24,12 @@ public class Comment {
 	private int likesCount;
 	private List<Long> likeUserId;
 	
+	public long getGoodsId() {
+		return goodsId;
+	}
+	public void setGoodsId(long goodsId) {
+		this.goodsId = goodsId;
+	}
 	public int getLikesCount() {
 		return likesCount;
 	}

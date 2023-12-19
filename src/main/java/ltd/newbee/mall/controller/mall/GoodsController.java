@@ -194,19 +194,27 @@ public class GoodsController {
             return ResultGenerator.genFailResult("参数异常！");
         }
         PageQueryUtil pageUtil = new PageQueryUtil(params);
-        return ResultGenerator.genSuccessResult(newBeeMallGoodsService.getCommentPage(pageUtil));
+        long goodsId = Long.valueOf(params.get("goodsId").toString());
+        return ResultGenerator.genSuccessResult(newBeeMallGoodsService.getCommentPage(pageUtil, goodsId));
     }
     
     @RequestMapping(value = "/comment/like", method = RequestMethod.PUT)
     @ResponseBody
     public void commentLike(@RequestBody Map<Object, Long> commentLike) {
-    	newBeeMallGoodsService.setcommentLike(commentLike);
+    	newBeeMallGoodsService.setCommentLike(commentLike);
     }
     
     @RequestMapping(value = "/comment/like/delete", method = RequestMethod.DELETE)
     @ResponseBody
     public void commentLikeDelete(@RequestBody Map<Object, Long> commentLikeDelete) {
     	newBeeMallGoodsService.deleteCommentLike(commentLikeDelete); 
-
+    }
+    
+    @RequestMapping(value = "/comment/submit", method = RequestMethod.PUT)
+    @ResponseBody
+    public void commentSubmit(@RequestBody Map<String, Object> commentSubmit) {
+    	System.out.print("**********************");
+        System.out.print(commentSubmit);
+    	newBeeMallGoodsService.setCommentSubmit(commentSubmit);
     }
 }

@@ -33,8 +33,9 @@ public interface NewBeeMallGoodsMapper {
 	List<Long> findLikeUserId(Long commentId);
 	List<Long> selectCommentId(PageQueryUtil pageUtil);
 	int getLikesCount(Long commentId);
-	void setcommentLike(Map<Object, Long> commentLike);
+	void setCommentLike(Map<Object, Long> commentLike);
 	void deleteCommentLike(Map<Object, Long> commentLikeDelete);
+	void setCommentSbumit(Comment newComment);
 
 	
     int deleteByPrimaryKey(Long goodsId);

@@ -183,7 +183,7 @@ public class NewBeeMallGoodsServiceImpl implements NewBeeMallGoodsService {
     }
 	
 	@Override
-    public PageResult getCommentPage(PageQueryUtil pageUtil) {
+    public PageResult getCommentPage(PageQueryUtil pageUtil, long goodsId) {
         List<Comment> commentList = goodsMapper.findCommentList(pageUtil);
         List<Long> commentId = goodsMapper.selectCommentId(pageUtil);
         List<List<Long>> likeUserIdList = new ArrayList<List<Long>>();
@@ -203,15 +203,26 @@ public class NewBeeMallGoodsServiceImpl implements NewBeeMallGoodsService {
     }
 	
 	@Override
-	public void setcommentLike(Map<Object, Long> commentLike) {
+	public void setCommentLike(Map<Object, Long> commentLike) {
 		// TODO Auto-generated method stub
-		goodsMapper.setcommentLike(commentLike);
+		goodsMapper.setCommentLike(commentLike);
 	}
 	
 	@Override
 	public void deleteCommentLike(Map<Object, Long> commentLikeDelete) {
 		// TODO Auto-generated method stub
 		goodsMapper.deleteCommentLike(commentLikeDelete);
+	}
+	
+	@Override
+	public void setCommentSubmit(Map<String, Object> commentSubmit) {
+        System.out.print(commentSubmit);
+		Comment newComment = new Comment();
+		newComment.setTime(new Date());
+		newComment.setUserId(Long.valueOf(commentSubmit.get("userId").toString()));
+		newComment.setComment(commentSubmit.get("comment").toString());
+		newComment.setGoodsId(Long.valueOf(commentSubmit.get("goodsId").toString()));
+		goodsMapper.setCommentSbumit(newComment);
 	}
 
 }

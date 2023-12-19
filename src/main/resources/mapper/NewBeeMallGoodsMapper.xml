@@ -281,7 +281,7 @@
     	values (#{goodsId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{checkTime,jdbcType=TIMESTAMP})
 	</insert>
 	
-	<insert id="setcommentLike" parameterType="Map">
+	<insert id="setCommentLike" parameterType="Map">
     	insert into comment_like (comment_id, like_user_id)
     	values (#{commentId,jdbcType=BIGINT}, #{likeUserId,jdbcType=BIGINT})
 	</insert>
@@ -291,6 +291,11 @@
     	from comment_like
     	where comment_id = #{commentId,jdbcType=BIGINT} and like_user_id = #{likeUserId,jdbcType=BIGINT}
 	</delete>
+	
+	<insert id="setCommentSbumit" parameterType="ltd.newbee.mall.entity.Comment">
+    	insert into comment (user_id, comment, time, goods_id)
+    	values (#{userId,jdbcType=BIGINT}, #{comment,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}, #{goodsId,jdbcType=BIGINT})
+	</insert>
 
     <select id="selectByPrimaryKeys" resultMap="BaseResultMap">
         select

@@ -23,9 +23,10 @@ public interface NewBeeMallGoodsService {
 	void updateAnswerById(Map<Object, String> updateAnswer);
 	PageResult getAnswerPage(PageQueryUtil pageUtil);
 	void setUserCheckedHistory(UserCheckedHistory userCheckedHistory);
-	PageResult getCommentPage(PageQueryUtil pageUtil);
-	void setcommentLike(Map<Object, Long> commentLike);
+	PageResult getCommentPage(PageQueryUtil pageUtil, long goodsId);
+	void setCommentLike(Map<Object, Long> commentLike);
 	void deleteCommentLike(Map<Object, Long> commentLikeDelete);
+	void setCommentSubmit(Map<String, Object> commentSubmit);
 
     /**
      * 后台分页
