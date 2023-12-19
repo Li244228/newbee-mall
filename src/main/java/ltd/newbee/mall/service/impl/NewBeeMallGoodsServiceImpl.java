@@ -207,5 +207,11 @@ public class NewBeeMallGoodsServiceImpl implements NewBeeMallGoodsService {
 		// TODO Auto-generated method stub
 		goodsMapper.setcommentLike(commentLike);
 	}
+	
+	@Override
+	public void deleteCommentLike(Map<Object, Long> commentLikeDelete) {
+		// TODO Auto-generated method stub
+		goodsMapper.deleteCommentLike(commentLikeDelete);
+	}
 
 }

@@ -202,4 +202,11 @@ public class GoodsController {
     public void commentLike(@RequestBody Map<Object, Long> commentLike) {
     	newBeeMallGoodsService.setcommentLike(commentLike);
     }
+    
+    @RequestMapping(value = "/comment/like/delete", method = RequestMethod.DELETE)
+    @ResponseBody
+    public void commentLikeDelete(@RequestBody Map<Object, Long> commentLikeDelete) {
+    	newBeeMallGoodsService.deleteCommentLike(commentLikeDelete); 
+
+    }
 }

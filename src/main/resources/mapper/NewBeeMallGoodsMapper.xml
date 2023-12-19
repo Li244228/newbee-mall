@@ -285,6 +285,12 @@
     	insert into comment_like (comment_id, like_user_id)
     	values (#{commentId,jdbcType=BIGINT}, #{likeUserId,jdbcType=BIGINT})
 	</insert>
+	
+	<delete id="deleteCommentLike" parameterType="Map">
+    	delete
+    	from comment_like
+    	where comment_id = #{commentId,jdbcType=BIGINT} and like_user_id = #{likeUserId,jdbcType=BIGINT}
+	</delete>
 
     <select id="selectByPrimaryKeys" resultMap="BaseResultMap">
         select
