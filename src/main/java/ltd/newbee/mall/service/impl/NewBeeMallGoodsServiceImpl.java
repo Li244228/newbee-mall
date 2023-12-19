@@ -201,5 +201,11 @@ public class NewBeeMallGoodsServiceImpl implements NewBeeMallGoodsService {
         PageResult pageResult = new PageResult(commentList, total, pageUtil.getLimit(), pageUtil.getPage());
         return pageResult;
     }
+	
+	@Override
+	public void setcommentLike(Map<Object, Long> commentLike) {
+		// TODO Auto-generated method stub
+		goodsMapper.setcommentLike(commentLike);
+	}
 
 }

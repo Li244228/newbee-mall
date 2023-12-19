@@ -196,4 +196,10 @@ public class GoodsController {
         PageQueryUtil pageUtil = new PageQueryUtil(params);
         return ResultGenerator.genSuccessResult(newBeeMallGoodsService.getCommentPage(pageUtil));
     }
+    
+    @RequestMapping(value = "/comment/like", method = RequestMethod.PUT)
+    @ResponseBody
+    public void commentLike(@RequestBody Map<Object, Long> commentLike) {
+    	newBeeMallGoodsService.setcommentLike(commentLike);
+    }
 }

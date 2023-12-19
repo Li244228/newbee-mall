@@ -280,6 +280,11 @@
     	insert into tb_newbee_mall_user_browsing_history (goods_id, user_id, check_time)
     	values (#{goodsId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{checkTime,jdbcType=TIMESTAMP})
 	</insert>
+	
+	<insert id="setcommentLike" parameterType="Map">
+    	insert into comment_like (comment_id, like_user_id)
+    	values (#{commentId,jdbcType=BIGINT}, #{likeUserId,jdbcType=BIGINT})
+	</insert>
 
     <select id="selectByPrimaryKeys" resultMap="BaseResultMap">
         select

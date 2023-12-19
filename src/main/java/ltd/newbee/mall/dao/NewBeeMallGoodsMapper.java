@@ -33,6 +33,7 @@ public interface NewBeeMallGoodsMapper {
 	List<Long> findLikeUserId(Long commentId);
 	List<Long> selectCommentId(PageQueryUtil pageUtil);
 	int getLikesCount(Long commentId);
+	void setcommentLike(Map<Object, Long> commentLike);
 
 	
     int deleteByPrimaryKey(Long goodsId);

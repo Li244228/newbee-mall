@@ -24,6 +24,7 @@ public interface NewBeeMallGoodsService {
 	PageResult getAnswerPage(PageQueryUtil pageUtil);
 	void setUserCheckedHistory(UserCheckedHistory userCheckedHistory);
 	PageResult getCommentPage(PageQueryUtil pageUtil);
+	void setcommentLike(Map<Object, Long> commentLike);
 
     /**
      * 后台分页
