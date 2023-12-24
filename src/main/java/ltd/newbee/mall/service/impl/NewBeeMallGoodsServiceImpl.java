@@ -34,6 +34,10 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -239,16 +243,16 @@ public class NewBeeMallGoodsServiceImpl implements NewBeeMallGoodsService {
 		goodsReview.setGoodsId(Long.valueOf(goodsReviewList.get("goodsId").toString()));
 		goodsReview.setUserId(Long.valueOf(goodsReviewList.get("userId").toString()));
 		goodsReview.setTime(new Date());
-		try {
-            // 将 MultipartFile 转换为 Base64 编码的字符串
-			String photo = Base64.encodeBase64String(file.getBytes());
-
-            // 将 photo 存储在entity中
-			goodsReview.setPhoto(photo);
+		String photo = new String();
+	    try {
+	    	Path dst = Path.of("C:\\Users\\liyin\\OneDrive\\画像\\destination", file.getOriginalFilename());
+		    Files.copy(file.getInputStream(), dst, StandardCopyOption.REPLACE_EXISTING);
+		    photo = dst.toString();
         } catch (IOException e) {
-            // 处理异常，例如记录日志或者抛出自定义异常
-            e.printStackTrace();
+            System.err.println("Error copying file: " + e.getMessage());
+            // 在实际应用中，可能需要采取适当的措施来处理异常，例如记录日志或向用户显示错误信息。
         }
+	    goodsReview.setPhoto(photo);
 		goodsMapper.setGoodsReview(goodsReview);
 	}
 
