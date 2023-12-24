@@ -17,6 +17,9 @@ import ltd.newbee.mall.util.PageResult;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.multipart.MultipartFile;
+
 public interface NewBeeMallGoodsService {
 	List<Answer> getAnswerById(List<Long> answerId);
 	int deleteAnswerById(List<Long> answerId);
@@ -27,6 +30,7 @@ public interface NewBeeMallGoodsService {
 	void setCommentLike(Map<Object, Long> commentLike);
 	void deleteCommentLike(Map<Object, Long> commentLikeDelete);
 	void setCommentSubmit(Map<String, Object> commentSubmit);
+	void setGoodsReview(Map<String, Object> goodsReviewList, MultipartFile file);
 
     /**
      * 后台分页

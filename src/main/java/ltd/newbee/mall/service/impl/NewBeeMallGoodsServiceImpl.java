@@ -18,6 +18,7 @@ import ltd.newbee.mall.entity.Answer;
 import ltd.newbee.mall.entity.Carousel;
 import ltd.newbee.mall.entity.Comment;
 import ltd.newbee.mall.entity.GoodsCategory;
+import ltd.newbee.mall.entity.GoodsReview;
 import ltd.newbee.mall.entity.NewBeeMallGoods;
 import ltd.newbee.mall.entity.UserCheckedHistory;
 import ltd.newbee.mall.service.NewBeeMallGoodsService;
@@ -25,10 +26,14 @@ import ltd.newbee.mall.util.BeanUtil;
 import ltd.newbee.mall.util.NewBeeMallUtils;
 import ltd.newbee.mall.util.PageQueryUtil;
 import ltd.newbee.mall.util.PageResult;
+
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -216,13 +221,35 @@ public class NewBeeMallGoodsServiceImpl implements NewBeeMallGoodsService {
 	
 	@Override
 	public void setCommentSubmit(Map<String, Object> commentSubmit) {
-        System.out.print(commentSubmit);
 		Comment newComment = new Comment();
 		newComment.setTime(new Date());
 		newComment.setUserId(Long.valueOf(commentSubmit.get("userId").toString()));
 		newComment.setComment(commentSubmit.get("comment").toString());
 		newComment.setGoodsId(Long.valueOf(commentSubmit.get("goodsId").toString()));
 		goodsMapper.setCommentSbumit(newComment);
+	}
+	
+	@Override
+	public void setGoodsReview(Map<String, Object> goodsReviewList, MultipartFile file) {
+		GoodsReview goodsReview = new GoodsReview();
+		goodsReview.setNickName(goodsReviewList.get("nickName").toString());
+		goodsReview.setReview(Long.valueOf(goodsReviewList.get("review").toString()));
+		goodsReview.setTitle(goodsReviewList.get("title").toString());
+		goodsReview.setText(goodsReviewList.get("text").toString());
+		goodsReview.setGoodsId(Long.valueOf(goodsReviewList.get("goodsId").toString()));
+		goodsReview.setUserId(Long.valueOf(goodsReviewList.get("userId").toString()));
+		goodsReview.setTime(new Date());
+		try {
+            // 将 MultipartFile 转换为 Base64 编码的字符串
+			String photo = Base64.encodeBase64String(file.getBytes());
+
+            // 将 photo 存储在entity中
+			goodsReview.setPhoto(photo);
+        } catch (IOException e) {
+            // 处理异常，例如记录日志或者抛出自定义异常
+            e.printStackTrace();
+        }
+		goodsMapper.setGoodsReview(goodsReview);
 	}
 
 }

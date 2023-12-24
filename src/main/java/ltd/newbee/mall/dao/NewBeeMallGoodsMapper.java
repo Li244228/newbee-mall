@@ -13,6 +13,7 @@ import ltd.newbee.mall.entity.SkuColumnMangementEntity;
 import ltd.newbee.mall.entity.SkuEntity;
 import ltd.newbee.mall.entity.Answer;
 import ltd.newbee.mall.entity.Comment;
+import ltd.newbee.mall.entity.GoodsReview;
 import ltd.newbee.mall.entity.StockNumDTO;
 import ltd.newbee.mall.entity.UserCheckedHistory;
 import ltd.newbee.mall.util.PageQueryUtil;
@@ -36,6 +37,7 @@ public interface NewBeeMallGoodsMapper {
 	void setCommentLike(Map<Object, Long> commentLike);
 	void deleteCommentLike(Map<Object, Long> commentLikeDelete);
 	void setCommentSbumit(Comment newComment);
+	void setGoodsReview(GoodsReview goodsReview);
 
 	
     int deleteByPrimaryKey(Long goodsId);

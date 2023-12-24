@@ -296,6 +296,13 @@
     	insert into comment (user_id, comment, time, goods_id)
     	values (#{userId,jdbcType=BIGINT}, #{comment,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}, #{goodsId,jdbcType=BIGINT})
 	</insert>
+	
+	<insert id="setGoodsReview" parameterType="ltd.newbee.mall.entity.GoodsReview">
+    	insert into goods_review (goods_id, user_id, review, nick_name, title, text, photo, time)
+    	values (#{goodsId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{review,jdbcType=VARCHAR}, 
+    	#{nickName,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{text,jdbcType=VARCHAR}, #{photo,jdbcType=VARCHAR}, 
+    	#{time,jdbcType=TIMESTAMP})
+	</insert>
 
     <select id="selectByPrimaryKeys" resultMap="BaseResultMap">
         select
