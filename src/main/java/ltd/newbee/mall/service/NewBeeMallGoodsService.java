@@ -30,7 +30,7 @@ public interface NewBeeMallGoodsService {
 	void setCommentLike(Map<Object, Long> commentLike);
 	void deleteCommentLike(Map<Object, Long> commentLikeDelete);
 	void setCommentSubmit(Map<String, Object> commentSubmit);
-	void setGoodsReview(Map<String, Object> goodsReviewList, MultipartFile file);
+	void setGoodsReview(Map<String, Object> goodsReviewList, MultipartFile[] file);
 
     /**
      * 后台分页

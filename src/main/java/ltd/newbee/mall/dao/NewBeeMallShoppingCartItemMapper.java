@@ -18,6 +18,7 @@ public interface NewBeeMallShoppingCartItemMapper {
 
     int insert(NewBeeMallShoppingCartItem record);
 
+    int insertSelectiveBySkuId(NewBeeMallShoppingCartItem record);
     int insertSelective(NewBeeMallShoppingCartItem record);
 
     NewBeeMallShoppingCartItem selectByPrimaryKey(Long cartItemId);

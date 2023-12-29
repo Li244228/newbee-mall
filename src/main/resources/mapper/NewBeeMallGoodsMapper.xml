@@ -299,9 +299,17 @@
 	
 	<insert id="setGoodsReview" parameterType="ltd.newbee.mall.entity.GoodsReview">
     	insert into goods_review (goods_id, user_id, review, nick_name, title, text, photo, time)
-    	values (#{goodsId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{review,jdbcType=VARCHAR}, 
-    	#{nickName,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{text,jdbcType=VARCHAR}, #{photo,jdbcType=VARCHAR}, 
-    	#{time,jdbcType=TIMESTAMP})
+    	values 
+        (
+            #{goodsId, jdbcType=BIGINT},
+            #{userId, jdbcType=BIGINT},
+            #{review, jdbcType=VARCHAR},
+            #{nickName, jdbcType=VARCHAR},
+            #{title, jdbcType=VARCHAR},
+            #{text, jdbcType=VARCHAR},
+            
+            #{time, jdbcType=TIMESTAMP}
+        )
 	</insert>
 
     <select id="selectByPrimaryKeys" resultMap="BaseResultMap">
@@ -319,6 +327,23 @@
         );
 
     </select>
+    
+    <select id="selectBySkuId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_newbee_mall_goods_info
+        where sku_id in
+        <foreach item="id" collection="list" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+        order by field(sku_id,
+        <foreach item="id" collection="list" separator=",">
+            #{id}
+        </foreach>
+        );
+
+    </select>
+    
     <select id="getTotalNewBeeMallGoods" parameterType="Map" resultType="int">
         select count(*) from tb_newbee_mall_goods_info
         <where>

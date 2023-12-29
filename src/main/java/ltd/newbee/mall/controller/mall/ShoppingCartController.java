@@ -66,6 +66,8 @@ public class ShoppingCartController {
                                                  HttpSession httpSession) {
         NewBeeMallUserVO user = (NewBeeMallUserVO) httpSession.getAttribute(Constants.MALL_USER_SESSION_KEY);
         newBeeMallShoppingCartItem.setUserId(user.getUserId());
+        //修改
+        newBeeMallShoppingCartItem.setSkuId((long)10147);
         String saveResult = newBeeMallShoppingCartService.saveNewBeeMallCartItem(newBeeMallShoppingCartItem);
         //添加成功
         if (ServiceResultEnum.SUCCESS.getResult().equals(saveResult)) {

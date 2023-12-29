@@ -47,6 +47,7 @@ public interface NewBeeMallGoodsMapper {
     int insertSelective(NewBeeMallGoods record);
 
     NewBeeMallGoods selectByPrimaryKey(Long goodsId);
+    NewBeeMallGoods selectBySkuId(Long skuId);
 
     NewBeeMallGoods selectByCategoryIdAndName(@Param("goodsName") String goodsName, @Param("goodsCategoryId") Long goodsCategoryId);
 

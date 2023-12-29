@@ -39,6 +39,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -234,7 +235,7 @@ public class NewBeeMallGoodsServiceImpl implements NewBeeMallGoodsService {
 	}
 	
 	@Override
-	public void setGoodsReview(Map<String, Object> goodsReviewList, MultipartFile file) {
+	public void setGoodsReview(Map<String, Object> goodsReviewList, MultipartFile[] file) {
 		GoodsReview goodsReview = new GoodsReview();
 		goodsReview.setNickName(goodsReviewList.get("nickName").toString());
 		goodsReview.setReview(Long.valueOf(goodsReviewList.get("review").toString()));
@@ -243,11 +244,15 @@ public class NewBeeMallGoodsServiceImpl implements NewBeeMallGoodsService {
 		goodsReview.setGoodsId(Long.valueOf(goodsReviewList.get("goodsId").toString()));
 		goodsReview.setUserId(Long.valueOf(goodsReviewList.get("userId").toString()));
 		goodsReview.setTime(new Date());
-		String photo = new String();
+		String[] photo = new String[file.length];
 	    try {
-	    	Path dst = Path.of("C:\\Users\\liyin\\OneDrive\\画像\\destination", file.getOriginalFilename());
-		    Files.copy(file.getInputStream(), dst, StandardCopyOption.REPLACE_EXISTING);
-		    photo = dst.toString();
+	    	for(int i = 0; i< photo.length; i++) {
+	    		Path dst = Path.of("C:\\Users\\liyin\\OneDrive\\画像\\destination", file[i].getOriginalFilename());
+	    		Files.copy(file[i].getInputStream(), dst, StandardCopyOption.REPLACE_EXISTING);
+	    		photo[i] = dst.toString();
+	    		System.out.print(dst.toString());
+	    		System.out.print(photo[i]);
+	    	}
         } catch (IOException e) {
             System.err.println("Error copying file: " + e.getMessage());
             // 在实际应用中，可能需要采取适当的措施来处理异常，例如记录日志或向用户显示错误信息。

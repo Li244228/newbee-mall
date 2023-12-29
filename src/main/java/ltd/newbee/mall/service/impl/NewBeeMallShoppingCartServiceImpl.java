@@ -42,7 +42,8 @@ public class NewBeeMallShoppingCartServiceImpl implements NewBeeMallShoppingCart
             temp.setGoodsCount(newBeeMallShoppingCartItem.getGoodsCount());
             return updateNewBeeMallCartItem(temp);
         }
-        NewBeeMallGoods newBeeMallGoods = newBeeMallGoodsMapper.selectByPrimaryKey(newBeeMallShoppingCartItem.getGoodsId());
+        //.getGoodsId()，.selectByPrimaryKey修改
+        NewBeeMallGoods newBeeMallGoods = newBeeMallGoodsMapper.selectBySkuId(newBeeMallShoppingCartItem.getSkuId());
         //商品为空
         if (newBeeMallGoods == null) {
             return ServiceResultEnum.GOODS_NOT_EXIST.getResult();
@@ -56,8 +57,8 @@ public class NewBeeMallShoppingCartServiceImpl implements NewBeeMallShoppingCart
         if (totalItem > Constants.SHOPPING_CART_ITEM_TOTAL_NUMBER) {
             return ServiceResultEnum.SHOPPING_CART_ITEM_TOTAL_NUMBER_ERROR.getResult();
         }
-        //保存记录
-        if (newBeeMallShoppingCartItemMapper.insertSelective(newBeeMallShoppingCartItem) > 0) {
+        //保存记录，修改.insertSelective
+        if (newBeeMallShoppingCartItemMapper.insertSelectiveBySkuId(newBeeMallShoppingCartItem) > 0) {
             return ServiceResultEnum.SUCCESS.getResult();
         }
         return ServiceResultEnum.DB_ERROR.getResult();

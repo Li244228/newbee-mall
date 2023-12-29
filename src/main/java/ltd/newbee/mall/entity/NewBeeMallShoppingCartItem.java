@@ -16,8 +16,18 @@ public class NewBeeMallShoppingCartItem {
     private Long userId;
 
     private Long goodsId;
+    
+    private Long skuId;
 
-    private Integer goodsCount;
+    public Long getSkuId() {
+		return skuId;
+	}
+
+	public void setSkuId(Long skuId) {
+		this.skuId = skuId;
+	}
+
+	private Integer goodsCount;
 
     private Byte isDeleted;
 

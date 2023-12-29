@@ -18,7 +18,7 @@ public class GoodsReview {
     private String nickName;
     private String title;
     private String text;
-    private String photo;
+    private String[] photo;
     private long goodsId;
     private long userId;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
@@ -66,10 +66,10 @@ public class GoodsReview {
 	public void setText(String text) {
 		this.text = text;
 	}
-	public String getPhoto() {
+	public String[] getPhoto() {
 		return photo;
 	}
-	public void setPhoto(String photo) {
+	public void setPhoto(String[] photo) {
 		this.photo = photo;
 	}
 }

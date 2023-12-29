@@ -221,7 +221,11 @@ public class GoodsController {
     }
     
     @PostMapping(value = "/goods/review", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public void goodsReview(@RequestParam Map<String, Object> goodsReviewList, @RequestPart("file") MultipartFile file) {
+    public Result goodsReview(@RequestParam Map<String, Object> goodsReviewList, @RequestPart("file") MultipartFile[] file) {
+    	if (file.length > 4) {
+    		return ResultGenerator.genFailResult("最多上传五张图片"); 
+    	}
     	newBeeMallGoodsService.setGoodsReview(goodsReviewList, file);
+    	return ResultGenerator.genSuccessResult();
     }
 }
