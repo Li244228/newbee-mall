@@ -8,27 +8,14 @@
  */
 package ltd.newbee.mall.entity;
 
-import java.util.Date;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
-public class GoodsReview {
+public class GoodsReviewPhoto {
 
     private long review;
-    private String nickName;
-    private String title;
-    private String text;
+    private String photo;
     private long goodsId;
     private long userId;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Date time;
     
-	public Date getTime() {
-		return time;
-	}
-	public void setTime(Date checkTime) {
-		this.time = checkTime;
-	}
 	public long getGoodsId() {
 		return goodsId;
 	}
@@ -47,22 +34,10 @@ public class GoodsReview {
 	public void setReview(long review) {
 		this.review = review;
 	}
-	public String getNickName() {
-		return nickName;
+	public String getPhoto() {
+		return photo;
 	}
-	public void setNickName(String nickName) {
-		this.nickName = nickName;
-	}
-	public String getTitle() {
-		return title;
-	}
-	public void setTitle(String title) {
-		this.title = title;
-	}
-	public String getText() {
-		return text;
-	}
-	public void setText(String text) {
-		this.text = text;
+	public void setPhoto(String photo) {
+		this.photo = photo;
 	}
 }

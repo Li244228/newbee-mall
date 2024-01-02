@@ -19,6 +19,7 @@ import ltd.newbee.mall.entity.Carousel;
 import ltd.newbee.mall.entity.Comment;
 import ltd.newbee.mall.entity.GoodsCategory;
 import ltd.newbee.mall.entity.GoodsReview;
+import ltd.newbee.mall.entity.GoodsReviewPhoto;
 import ltd.newbee.mall.entity.NewBeeMallGoods;
 import ltd.newbee.mall.entity.UserCheckedHistory;
 import ltd.newbee.mall.service.NewBeeMallGoodsService;
@@ -247,17 +248,20 @@ public class NewBeeMallGoodsServiceImpl implements NewBeeMallGoodsService {
 		String[] photo = new String[file.length];
 	    try {
 	    	for(int i = 0; i< photo.length; i++) {
+	    		GoodsReviewPhoto goodsReviewPhoto = new GoodsReviewPhoto();
 	    		Path dst = Path.of("C:\\Users\\liyin\\OneDrive\\画像\\destination", file[i].getOriginalFilename());
 	    		Files.copy(file[i].getInputStream(), dst, StandardCopyOption.REPLACE_EXISTING);
-	    		photo[i] = dst.toString();
-	    		System.out.print(dst.toString());
-	    		System.out.print(photo[i]);
+	    		goodsReviewPhoto.setPhoto(dst.toString()); 
+	    		goodsReviewPhoto.setGoodsId(Long.valueOf(goodsReviewList.get("goodsId").toString()));
+	    		goodsReviewPhoto.setUserId(Long.valueOf(goodsReviewList.get("userId").toString()));
+	    		goodsReviewPhoto.setReview(Long.valueOf(goodsReviewList.get("review").toString()));
+	    		goodsMapper.setGoodsReviewPhoto(goodsReviewPhoto);
 	    	}
         } catch (IOException e) {
             System.err.println("Error copying file: " + e.getMessage());
             // 在实际应用中，可能需要采取适当的措施来处理异常，例如记录日志或向用户显示错误信息。
         }
-	    goodsReview.setPhoto(photo);
+
 		goodsMapper.setGoodsReview(goodsReview);
 	}
 
